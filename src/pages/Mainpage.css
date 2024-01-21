@@ -3,21 +3,3 @@
     height: 100vh;
     display: flex;  
 }
-
-.profilebarBackground{
-    background-color: #FFFFFF;
-    width: 20%;
-    height: 100vh;
-}
-
-.profilebar{
-    background-color: #FFFFFF;
-    width: 92%;
-    height: 100vh;
-    box-shadow: 5px 0px 12px 6px rgba(0, 0, 0, 0.46);
-}
-
-.logo{
-    padding-left: 12%;
-    width: 70%;
-}

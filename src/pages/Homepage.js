@@ -7,7 +7,7 @@ function Homepage(){
         <div className='mainbody'>
             
             <ProfileBar/>
-            115
+            ewfewfewfdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         </div>
     )
 }
