@@ -1,5 +1,7 @@
 .mainbody {
     background-color: #EEE6D3;
-    height: 100vh;
-    display: flex;  
+    height: 100%;
+    width: 100%;
+    display: flex;
+    
 }

@@ -1,3 +1,4 @@
+import Post from '../components/Postlist';
 import ProfileBar from '../components/Profilebar';
 import './Mainpage.css';
 
@@ -7,7 +8,7 @@ function Homepage(){
         <div className='mainbody'>
             
             <ProfileBar/>
-            ewfewfewfdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            <Post/>
         </div>
     )
 }

@@ -22,6 +22,7 @@ const ProfileBar = () => {
             
           </div>}
         </>
+        <hr/>
         <ProfileButton Detail='หน้าแรก' Img={homeIcon}/>
         <ProfileButton Detail='สำรวจ' Img={explorIcon}/>
         <div className='copyright'>

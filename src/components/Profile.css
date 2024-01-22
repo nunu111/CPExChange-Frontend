@@ -8,18 +8,18 @@
 }
 
 .profilebarBackground{
-    position: relative;
+    position: sticky;
+    top: 0;
     background-color: #FFFFFF;
     width: 450px;
     height: 100vh;
 }
 
 .profilebar{
-    
     position: relative;
     background-color: #FFFFFF;
     width: 92%;
-    height: 100vh;
+    height: 100%;
     box-shadow: 5px 0px 12px 6px rgba(0, 0, 0, 0.46);
     
 }
@@ -58,13 +58,18 @@
     
 }
 .profilebutton .content .text{
-    font-size: 25px;
+    font-size: 20px;
     width: 200px;
     justify-content: left;
-    padding-left: 20%;
+    padding-left: 10%;
 }
 
 .profilebuttonImg {
     max-height: 30px;
     margin: 0 5px 0 30px;
+}
+
+hr{
+    margin: 0 10px 0 10px;
+    opacity: 0.3;
 }
