@@ -1,4 +1,3 @@
-// LoginButton.jsx
 import React, { useState } from "react";
 import "../pages/Mainpage.css";
 import Popup_Login from "./Popup_Login";
@@ -8,12 +7,8 @@ const LoginButton = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const onClick = () => {
-    setPopupVisibility(true);
+    setPopupVisibility((prevIsPopupVisible) => !prevIsPopupVisible);
     console.log("ass");
-  };
-
-  const onClose = () => {
-    setPopupVisibility(false);
   };
 
   return (
