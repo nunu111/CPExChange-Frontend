@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
 import "../pages/Mainpage.css";
+import ReactDOM from "react-dom";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ const Login = (props) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div className="popup-overlay">
       <div className="popup-container">
         <div className="popup-content">
@@ -79,7 +80,8 @@ const Login = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
