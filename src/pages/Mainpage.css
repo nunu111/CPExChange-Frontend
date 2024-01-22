@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* Set a high z-index to make sure it appears in front of other elements */
+  z-index: 99999999; /* Set a high z-index to make sure it appears in front of other elements */
 }
 
 .popup-container {
@@ -23,5 +23,5 @@
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 1001; /* Set a higher z-index to make sure it appears in front of the overlay */
+  z-index: 99999999; /* Set a higher z-index to make sure it appears in front of the overlay */
 }
