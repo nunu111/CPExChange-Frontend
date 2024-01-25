@@ -1,7 +1,7 @@
 import React from 'react'
 import './Postlist.css'
 import Postbox from './Postbox'
-const Post = () => {
+const PostList = () => {
   return (
     <div className='Mainbox'>
         <div className='Topicbox'>
@@ -26,4 +26,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default PostList

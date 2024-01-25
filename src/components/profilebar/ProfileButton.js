@@ -1,16 +1,20 @@
 
 import React from 'react'
 import './Profile.css'
-const ProfileButton = ({Detail,Img})=>{
+import { Link, useLocation } from "react-router-dom";
+const ProfileButton = ({Detail,Img,path})=>{
+    const location = useLocation();
+    const resultcss = location.pathname === path? 'profilebuttonON':'profilebutton';
+
     return (
-        <div className='profilebutton'>
+        <Link to={path} className={resultcss}>
             <div className='content'>
             <img src={Img} className='profilebuttonImg'/>
             <div className='text'>
                 {Detail}
             </div>
             </div>
-        </div>
+        </Link>
     )
 }
 export default ProfileButton;

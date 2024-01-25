@@ -22,7 +22,7 @@ const LoginButton = (props) => {
         }`}
         aria-disabled={disabled || isPopupVisible}
       >
-        Login
+        ลงชื่อเข้าใช้
       </div>
 
       {isPopupVisible && <Popup_Login />}
