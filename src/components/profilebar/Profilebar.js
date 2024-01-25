@@ -25,12 +25,12 @@ const ProfileBar = () => {
             </div>
           )}
         </>
-        <hr/>
-        
-        <ProfileButton Detail='หน้าแรก' Img={homeIcon}/>
-        <ProfileButton Detail='สำรวจ' Img={explorIcon}/>
+        <hr />
+
+        <ProfileButton Detail="หน้าแรก" Img={homeIcon} />
+        <ProfileButton Detail="สำรวจ" Img={explorIcon} />
         <LoginButton />
-        <div className='copyright'>
+        <div className="copyright">
           Copyright © 2023 ·
           <br />
           CPExhange.com โครงงานวิชา Software Engineer 261361 2/66
