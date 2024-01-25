@@ -1,6 +1,7 @@
 .Mainbox{
+    
     width: 100%;
-    margin: 50px 50px 20px 50px;
+    margin: 50px 0px 20px 50px;
 }
 .Topicbox{
     width: fit-content;
@@ -21,10 +22,15 @@
 .Postbox{
     position: relative;
     background-color: #FFFFFF;
-    padding: 18px 0 18px 18px;
+    padding: 18px 30px 18px 30px;
     margin-top: 20px;
-    border-radius: 20px;
-    font-size: 20px;
+    margin-right: 50px;
+    border-radius: 20px;    
+    
+}
+.Postbox .Title{
+    overflow-wrap: break-word;
+    font-size: 40px;
 }
 .bookmark{
     position: absolute;
@@ -32,4 +38,19 @@
     right: 10px;
     height: 38px;
     margin-left: 100px;
+}
+
+
+.tag{
+    display: inline;
+    background-color: #D9D9D9;
+    width: fit-content;
+    margin : 0 10px 0 0;
+    padding: 3px 15px 3px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.detail{
+    color: #3D3D3D;
 }

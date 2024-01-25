@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import logo from "./Icon/logo.svg";
-import loginIcon from "./Icon/login.svg";
-import registerIcon from "./Icon/register.svg";
+import logo from "../Icon/logo.svg";
+import loginIcon from "../Icon/login.svg";
+import registerIcon from "../Icon/register.svg";
 import ProfileButton from "./ProfileButton";
-import homeIcon from "./Icon/home.svg";
-import explorIcon from "./Icon/explor.svg";
-import LoginButton from "./LoginButton";
-import Popup_Login from "./Popup_Login";
+import homeIcon from "../Icon/home.svg";
+import explorIcon from "../Icon/explor.svg";
+import LoginButton from "../LoginButton";
+import Popup_Login from "../Popup_Login";
+
 const ProfileBar = () => {
   const [Login, setLogin] = useState(false);
   return (
