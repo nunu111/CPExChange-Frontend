@@ -8,38 +8,33 @@ import homeIcon from "../Icon/home.svg";
 import explorIcon from "../Icon/explor.svg";
 import LoginButton from "../LoginButton";
 import Popup_Login from "../Popup_Login";
+import SigninButton from "../SigninButton";
 import { Link } from "react-router-dom";
-
 
 const ProfileBar = () => {
   const [Login, setLogin] = useState(false);
-  
+
   return (
     <div className="profilebarBackground">
       <div className="profilebar">
-        <Link to={'/'}><img src={logo} className="logo" alt="logo" /></Link>
-        
+        <Link to={"/"}>
+          <img src={logo} className="logo" alt="logo" />
+        </Link>
+
         <>
           {Login ? (
             <></>
           ) : (
             <div>
-              <div className='profilebutton'>
-                <div className='content'>
-                  <img src={loginIcon} className='profilebuttonImg'/>
-                  <div className='text'>
-                <LoginButton />
-                  </div>
-                </div>
-              </div>
-              <ProfileButton Detail="สมัครบัญชี" Img={registerIcon} path={""}/>
+              <LoginButton />
+              <SigninButton />
             </div>
           )}
         </>
         <hr />
-        
+
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
-        <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""}/>
+        <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
         <div className="copyright">
           Copyright © 2023 ·
           <br />

@@ -6,7 +6,7 @@ import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
 import logo from "./Icon/logo.svg";
 
-const Login = (props) => {
+const Signin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -101,4 +101,4 @@ const Login = (props) => {
     : null;
 };
 
-export default Login;
+export default Signin;
