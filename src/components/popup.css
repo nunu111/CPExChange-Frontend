@@ -73,3 +73,15 @@
   border: none;
   outline: none;
 }
+
+.exitButton1 {
+  position: absolute;
+  top: 175px;
+  right: 600px;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

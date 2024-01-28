@@ -38,6 +38,7 @@ const Login = (props) => {
 
     // Assuming login is successful, you can close the popup
     console.log("Login successful!");
+    togglePopupVisibility();
   };
 
   console.log("Rendering Popup:", isPopupVisible);

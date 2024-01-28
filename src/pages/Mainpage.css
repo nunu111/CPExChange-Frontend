@@ -23,7 +23,15 @@
 
 .popup-container {
   background: white;
-  padding: 20px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001; /* Set a higher z-index to make sure it appears in front of the overlay */
+}
+
+.popup-container1 {
+  background: white;
+  padding: 70px;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1001; /* Set a higher z-index to make sure it appears in front of the overlay */
