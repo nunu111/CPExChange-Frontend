@@ -3,16 +3,16 @@ import ProfileButton from "./profilebar/ProfileButton";
 import loginIcon from "./Icon/login.svg";
 import Popup_Login from "./Popup_Login";
 
-const LoginButton = () => {
+const LoginButton = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopupVisibility = () => {
-    setPopupVisibility((prevIsPopupVisible) => !prevIsPopupVisible);
+    setPopupVisibility(!isPopupVisible);
   };
 
   const onClick = () => {
     togglePopupVisibility();
-    console.log("ass");
+    
   };
 
   return (
@@ -23,6 +23,7 @@ const LoginButton = () => {
       <Popup_Login
         isPopupVisible={isPopupVisible}
         togglePopupVisibility={togglePopupVisibility}
+        LoginState={props.LoginState}
       />
     </div>
   );

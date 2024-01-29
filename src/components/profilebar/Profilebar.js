@@ -7,9 +7,18 @@ import explorIcon from "../Icon/explor.svg";
 import LoginButton from "../LoginButton";
 import SigninButton from "../SigninButton";
 import { Link } from "react-router-dom";
-
-const ProfileBar = () => {
-  const [Login, setLogin] = useState(false);
+import mybookmarkIcon from "../Icon/mybookmark.svg"
+import mypostIcon from "../Icon/mypost.svg"
+import unknowIcon from "../Icon/unknow.svg"
+import infoIcon from "../Icon/info.svg"
+import logoutIcon from "../Icon/logout.svg"
+import notiIcon from "../Icon/noti.svg"
+import editIcon from "../Icon/edit.svg"
+const ProfileBar = (props) => {
+  
+  function logout () {
+    props.Logout();
+  }
 
   return (
     <div className="profilebarBackground">
@@ -19,19 +28,27 @@ const ProfileBar = () => {
         </Link>
 
         <>
-          {Login ? (
-            <></>
+          {props.isLogin() ? (
+            <div className="userprofile">
+              <img src={unknowIcon} className="profile" alt="profile" />
+              <p className="text">Username99</p>
+              <span className="icon"><img src={notiIcon}  alt="noti" /></span>
+              <span className="icon"><img src={editIcon}  alt="edit" /></span>
+              <span onClick={logout} className="icon"><img src={logoutIcon} alt="logout" /></span>
+              <span className="icon"><img src={infoIcon}  alt="info" /></span>
+            </div>
           ) : (
             <div>
-              <LoginButton />
+              <LoginButton LoginState={props.nowLogin}/>
               <SigninButton />
             </div>
           )}
         </>
         <hr />
-
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
         <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
+        {props.isLogin() && <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={""} />}
+        {props.isLogin() && <ProfileButton Detail="ที่บันทึกไว้" Img={mybookmarkIcon} path={""} />}
         <div className="copyright">
           Copyright © 2023 ·
           <br />

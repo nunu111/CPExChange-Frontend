@@ -5,7 +5,8 @@ import "./index.css";
 import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
 import Signin1 from "./Popup_Signin1";
-
+import XIcon from "./Icon/X.svg";
+import testE from "./test";
 const Signin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +14,7 @@ const Signin = (props) => {
   const [passwordError, setPasswordError] = useState("");
   const [password1, setPassword1] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
-
+  const [isSignin,setIsSignin] = useState(false);
   const navigate = useNavigate();
 
   const onButtonClick1 = () => {
@@ -43,31 +44,28 @@ const Signin = (props) => {
     }
 
     // Assuming login is successful, you can close the popup
+    setIsSignin(true);
     togglePopupVisibility();
+    
   };
-
-  console.log("Rendering Popup:", isPopupVisible);
 
   return (
     <>
       {isPopupVisible &&
         ReactDOM.createPortal(
           <div className="popup-overlay">
+            <div style={{width: "100%", height: "100%"}} onClick={togglePopupVisibility}/>
             <div className="popup-container1">
               <div className="popup-content">
+                
                 <div className={"mainContainer"}>
+                  
                   <div className={"titleContainer"}>
+                    
                     <div>สมัครบัญชีผู้ใช้</div>
-                    <button
-                      className="exitButton1"
-                      onClick={() => {
-                        console.log("Exit button clicked!");
-                        togglePopupVisibility();
-                      }}
-                    >
-                      X
-                    </button>
+                    
                   </div>
+                  <img src={XIcon} alt="Exit" className="exitButton1" onClick={togglePopupVisibility}/>
                   <br />
                   <div className={"inputContainer"}>
                     Username
@@ -111,15 +109,20 @@ const Signin = (props) => {
                       onClick={onButtonClick1}
                       value={"ต่อไป"}
                     />
-                    <Signin1 />
+                    
+
                   </div>
                 </div>
               </div>
             </div>
           </div>,
           document.body
-        )}
-      {<Signin1 />}
+        )}{
+          
+          isSignin? <>
+          
+          </>:<>1150</>
+        }
     </>
   );
 };

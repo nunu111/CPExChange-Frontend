@@ -22,6 +22,8 @@
 }
 
 .popup-container {
+  border-radius: 20px;
+  position: fixed;
   background: white;
   padding: 30px;
   border: 1px solid #ccc;
@@ -30,6 +32,8 @@
 }
 
 .popup-container1 {
+  border-radius: 20px;
+  position: fixed;
   background: white;
   padding: 70px;
   border: 1px solid #ccc;

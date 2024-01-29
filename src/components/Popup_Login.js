@@ -5,7 +5,7 @@ import "./index.css";
 import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
 import logo from "./Icon/logo.svg";
-
+import XIcon from "./Icon/X.svg";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,16 +38,17 @@ const Login = (props) => {
 
     // Assuming login is successful, you can close the popup
     console.log("Login successful!");
+    props.LoginState();
     togglePopupVisibility();
   };
 
-  console.log("Rendering Popup:", isPopupVisible);
 
   return isPopupVisible
     ? ReactDOM.createPortal(
-        <div className="popup-overlay">
-          <div className="popup-container">
-            <div className="popup-content">
+      <div>
+        <div className="popup-overlay" >
+        <div style={{width: "100%", height: "100%"}} onClick={togglePopupVisibility}/> {/* Add this line to close the popup on click */}
+          <div className="popup-container" >
               <div className={"mainContainer"}>
                 <div className={"titleContainer"}>
                   <img src={logo} className="logo" alt="logo" />
@@ -59,7 +60,7 @@ const Login = (props) => {
                       togglePopupVisibility();
                     }}
                   >
-                    X
+                    <img src={XIcon} className="ExitIcon" alt="Exit" />
                   </button>
                 </div>
                 <br />
@@ -94,12 +95,12 @@ const Login = (props) => {
                   />
                 </div>
               </div>
-            </div>
           </div>
+        </div>
         </div>,
         document.body
       )
-    : null;
+    : <></>;
 };
 
 export default Login;
