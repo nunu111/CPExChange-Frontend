@@ -1,8 +1,9 @@
 import PostList from "../components/Postlist";
 import ProfileBar from "../components/profilebar/Profilebar";
+import CreatePost from "../components/postsection/CreatePost";
 import "./Mainpage.css";
 
-function Homepage(props) {
+function CreatePostpage(props) {
   return (
     <div className="mainbody">
       <ProfileBar
@@ -10,9 +11,9 @@ function Homepage(props) {
         nowLogin={props.nowLogin}
         Logout={props.Logout}
       />
-      <PostList isLogin={props.isLogin} />
+      <CreatePost />
     </div>
   );
 }
 
-export default Homepage;
+export default CreatePostpage;
