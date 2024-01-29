@@ -116,3 +116,48 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px;
     text-decoration: none;
 }
+.CreatePostButton{
+    margin-bottom: 18px;
+    font-size: 30px;
+    position: relative;
+
+    cursor: pointer;
+    font-size: 20px;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 4px;
+    width: fit-content;
+    transition: 0.3s;
+    
+}
+
+.CreatePostButton:active{
+    margin-bottom: 18px;
+    font-size: 30px;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: #979797;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 6px 4px;
+    width: fit-content;
+    
+}
+
+.CreatePostButton .icon{
+    position: relative;
+    top: 2px;
+    width: 50px;
+    color: #575757;
+}
+.CreatePostButton .text{
+    position: relative;
+    top: -5px;
+    margin: auto;
+    width: 50%;
+    font-size: 40px;
+    padding: 10px;
+    
+}

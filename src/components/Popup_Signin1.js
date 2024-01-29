@@ -16,8 +16,8 @@ const Signin1 = (props) => {
 
   console.log("Rendering Popup:", isPopupVisible);
 
-  return isPopupVisible
-    ? ReactDOM.createPortal(
+  return (<>{isPopupVisible
+    && ReactDOM.createPortal(
         <div className="popup-overlay">
           <div style={{width: "100%", height: "100%"}} onClick={togglePopupVisibility}/>
           <div className="popup-container1">
@@ -51,7 +51,7 @@ const Signin1 = (props) => {
         </div>,
         document.body
       )
-    : null;
+    }</>)
 };
 
 export default Signin1;

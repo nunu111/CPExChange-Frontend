@@ -6,8 +6,9 @@ import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
 import Signin1 from "./Popup_Signin1";
 import XIcon from "./Icon/X.svg";
-import testE from "./test";
+import {SigninFunc} from "./function/Signinfunc";
 const Signin = (props) => {
+  const {SigninState1} = SigninFunc();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -17,7 +18,7 @@ const Signin = (props) => {
   const [isSignin,setIsSignin] = useState(false);
   const navigate = useNavigate();
 
-  const onButtonClick1 = () => {
+  const onButtonClick1 = (props) => {
     // Set initial error values to empty
     setEmailError("");
     setPasswordError("");
@@ -42,9 +43,8 @@ const Signin = (props) => {
       setPasswordError("Password does not match");
       return;
     }
-
     // Assuming login is successful, you can close the popup
-    setIsSignin(true);
+    setIsSignin(SigninState1(email,password));
     togglePopupVisibility();
     
   };
@@ -120,7 +120,7 @@ const Signin = (props) => {
         )}{
           
           isSignin? <>
-          
+          <Signin1 />
           </>:<>1150</>
         }
     </>

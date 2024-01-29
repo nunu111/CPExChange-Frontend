@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
 import './Postlist.css'
 import Postbox from './Postbox'
-const PostList = () => {
+import editIcon from './Icon/editbig.svg'
+const PostList = (props) => {
   const [PostList,setPostList] = useState([])
 
   return (
     <div className='Mainbox'>
+      { 
+        props.isLogin() &&<div>
+        
+        <div className='CreatePostButton'>
+        <img src={editIcon} className='icon' alt='edit'/>
+        <span className='text'>
+        เขียนโพสต์...</span></div>
+        <hr/>
+        </div>
+        
+      }
+        
         <div className='Topicbox'>
             <span className='Text'>โพสต์ยอดฮิต</span>
             <span> / </span>

@@ -6,7 +6,7 @@ function Homepage(props) {
   return (
     <div className="mainbody">
       <ProfileBar isLogin={props.isLogin} nowLogin={props.nowLogin} Logout={props.Logout}/>
-      <PostList /> 
+      <PostList isLogin={props.isLogin}/> 
     </div>
   );
 }

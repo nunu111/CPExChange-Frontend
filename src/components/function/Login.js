@@ -5,17 +5,14 @@ export function Login() {
 
   function nowLogin () {
     setLogin(true);
-    console.log("now" + Login);
   };
 
   const isLogin = () => {
-    console.log("check:" + Login);
     return Login
   };
 
   function logout () {
     setLogin(false);
-    console.log("now" + Login);
   };
   return {
     nowLogin,
