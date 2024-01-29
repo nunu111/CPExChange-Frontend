@@ -11,7 +11,7 @@ const PostList = (props) => {
     <div className="Mainbox">
       {props.isLogin() && (
         <div>
-          <Link to="/Create-Post">
+          <Link to="/Create-Post" className="nounderline">
             <div className="CreatePostButton">
               <img src={editIcon} className="icon" alt="edit" />
               <span className="text">เขียนโพสต์...</span>

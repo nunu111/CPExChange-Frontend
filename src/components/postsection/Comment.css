@@ -91,3 +91,11 @@
     top: -4px;
     font-size: 15px;
 }
+
+.goback{
+    font-size: 30px;
+    color: #000000;
+    position: relative;
+    text-decoration: none;
+    width: fit-content;
+}

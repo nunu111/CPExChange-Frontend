@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Postlist.css";
 import pinIcon from "../Icon/pin.svg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import heartIcon from "../Icon/heart.svg";
 import PostTag from "../posttag";
 import Comment from "./Comment";
@@ -9,10 +9,14 @@ import "./Comment.css";
 export default function Post() {
   const params = useParams();
   const PID = params.PID;
-  const [Tags, setTag] = useState(["ไก่ย่าง", "เเล่นเกมที่บ้าน"]);
+  const [Tags, setTag] = useState(["ไก่ย่าง", "เล่นเกมที่บ้าน"]);
 
   return (
     <div className="Mainbox">
+      <Link to="/" className="goback">
+        {"< ย้อนกลับ"}
+      </Link>
+
       <div className="Postbox">
         <div className="Title">Post{PID}</div>
         <div className="top">
