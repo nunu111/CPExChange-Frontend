@@ -32,13 +32,27 @@
     overflow-wrap: break-word;
     font-size: 30px;
 }
-.bookmark{
+
+.top{
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 40px;
+    
+}
+.top .bookmark{
+    bottom: -4px;
+    position: relative;
     height: 38px;
-    margin-left: 100px;
+    margin-left: 10px;
     cursor: pointer;
+}
+.top .like{
+    height: 30px;
+    cursor: pointer;
+}
+.top .text{
+    font-size: 35px;
+    color: #AFAFAF;
 }
 
 
@@ -120,7 +134,6 @@
     margin-bottom: 18px;
     font-size: 30px;
     position: relative;
-
     cursor: pointer;
     font-size: 20px;
     background-color: #FFFFFF;

@@ -9,8 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Post" element={<Postpage isLogin={isLogin} nowLogin={nowLogin} Logout={logout}/>} />
-        <Route index element={<Homepage isLogin={isLogin} nowLogin={nowLogin} Logout={logout}/>}>
+        <Route path="/Post/:PID" element={<Postpage isLogin={isLogin} nowLogin={nowLogin} Logout={logout}/>} />
+        <Route path='/' element={<Homepage isLogin={isLogin} nowLogin={nowLogin} Logout={logout}/>}>
         
           {/* <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />

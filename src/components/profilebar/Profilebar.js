@@ -44,7 +44,7 @@ const ProfileBar = (props) => {
             </div>
           )}
         </>
-        <hr />
+        <hr className="barhr" />
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
         <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
         {props.isLogin() && <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={""} />}
