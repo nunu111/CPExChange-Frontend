@@ -50,6 +50,8 @@ export default function Post() {
           <p className="ctitle">Comment section</p>
           <hr className="chr" />
           <Comment />
+          <Comment />
+          <Comment />
         </div>
       </div>
     </div>
