@@ -6,7 +6,7 @@ function Homepage() {
   return (
     <div className="mainbody">
       <ProfileBar />
-      <PostList />  
+      <PostList /> 
     </div>
   );
 }
