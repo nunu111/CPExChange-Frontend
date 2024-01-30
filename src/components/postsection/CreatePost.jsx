@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import { CKEditor, CKEditorContext } from "@ckeditor/ckeditor5-react";
-import { ClassicEditor } from "@ckeditor/ckeditor5-editor-classic";
-import { Context } from "@ckeditor/ckeditor5-core";
-import { Bold, Italic } from "@ckeditor/ckeditor5-basic-styles";
-import { Essentials } from "@ckeditor/ckeditor5-essentials";
-import { Paragraph } from "@ckeditor/ckeditor5-paragraph";
+
+import Editor from "./Editor";
 
 export default function CreatePost(props) {
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, []);
   return (
-    <div className="mainbox">
+    <div className="Mainbox">
       <div>
-        <Link to="/">
-          <button>Go to Home</button>
+        <Link to="/" className="goback">
+          {"< ย้อนกลับ"}
         </Link>
       </div>
       <br />
@@ -22,7 +24,16 @@ export default function CreatePost(props) {
           fullWidth
           label="TOPIC"
           id="fullWidth"
-          style={{ width: "800px" }}
+          style={{ width: "1250px" }}
+        />
+      </div>
+      <br />
+      <div className="Postbox">
+        <Editor
+          onChange={(data) => {
+            setData(data);
+          }}
+          editorLoaded={editorLoaded}
         />
       </div>
     </div>
