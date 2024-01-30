@@ -7,17 +7,23 @@ import explorIcon from "../Icon/explor.svg";
 import LoginButton from "../LoginButton";
 import SigninButton from "../SigninButton";
 import { Link } from "react-router-dom";
-import mybookmarkIcon from "../Icon/mybookmark.svg"
-import mypostIcon from "../Icon/mypost.svg"
-import unknowIcon from "../Icon/unknow.svg"
-import infoIcon from "../Icon/info.svg"
-import logoutIcon from "../Icon/logout.svg"
-import notiIcon from "../Icon/noti.svg"
-import editIcon from "../Icon/edit.svg"
+import mybookmarkIcon from "../Icon/mybookmark.svg";
+import mypostIcon from "../Icon/mypost.svg";
+import unknowIcon from "../Icon/unknow.svg";
+import infoIcon from "../Icon/info.svg";
+import logoutIcon from "../Icon/logout.svg";
+import notiIcon from "../Icon/noti.svg";
+import editIcon from "../Icon/edit.svg";
+import PopupExit from "./PopupExit";
+
 const ProfileBar = (props) => {
-  
-  function logout () {
+  const [logoutPopupVisible, setLogoutPopupVisible] = useState(false);
+
+  function logout() {
+    // You can perform any additional logout logic here
     props.Logout();
+    // Close the popup after logout
+    setLogoutPopupVisible(false);
   }
 
   return (
@@ -32,23 +38,46 @@ const ProfileBar = (props) => {
             <div className="userprofile">
               <img src={unknowIcon} className="profile" alt="profile" />
               <p className="text">Username99</p>
-              <span className="icon"><img src={notiIcon}  alt="noti" /></span>
-              <span className="icon"><img src={editIcon}  alt="edit" /></span>
-              <span onClick={logout} className="icon"><img src={logoutIcon} alt="logout" /></span>
-              <span className="icon"><img src={infoIcon}  alt="info" /></span>
+              <span className="icon">
+                <img src={notiIcon} alt="noti" />
+              </span>
+              <span className="icon">
+                <img src={editIcon} alt="edit" />
+              </span>
+              <span
+                onClick={() => setLogoutPopupVisible(true)}
+                className="icon"
+              >
+                <img src={logoutIcon} alt="logout" />
+              </span>
+              <span className="icon">
+                <img src={infoIcon} alt="info" />
+              </span>
             </div>
           ) : (
             <div>
-              <LoginButton LoginState={props.nowLogin}/>
+              <LoginButton LoginState={props.nowLogin} />
               <SigninButton />
             </div>
           )}
         </>
+
+        {/* Logout Popup */}
+        <PopupExit
+          visible={logoutPopupVisible}
+          onClose={() => setLogoutPopupVisible(false)}
+          onLogout={logout}
+        />
+
         <hr className="barhr" />
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
         <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
-        {props.isLogin() && <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={""} />}
-        {props.isLogin() && <ProfileButton Detail="ที่บันทึกไว้" Img={mybookmarkIcon} path={""} />}
+        {props.isLogin() && (
+          <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={""} />
+        )}
+        {props.isLogin() && (
+          <ProfileButton Detail="ที่บันทึกไว้" Img={mybookmarkIcon} path={""} />
+        )}
         <div className="copyright">
           Copyright © 2023 ·
           <br />
