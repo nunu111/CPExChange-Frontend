@@ -11,6 +11,11 @@ export default function CreatePost(props) {
   useEffect(() => {
     setEditorLoaded(true);
   }, []);
+
+  const DataPost = () => {
+    console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
+  };
+
   return (
     <div className="Mainbox">
       <div>
@@ -19,7 +24,7 @@ export default function CreatePost(props) {
         </Link>
       </div>
       <br />
-      <div className="Topicbox">
+      <div className="Postbox">
         <TextField
           fullWidth
           label="TOPIC"
@@ -30,11 +35,22 @@ export default function CreatePost(props) {
       <br />
       <div className="Postbox">
         <Editor
-          onChange={(data) => {
-            setData(data);
+          onChange={(editorData) => {
+            setData(editorData);
           }}
           editorLoaded={editorLoaded}
         />
+      </div>
+
+      <div
+        className="CreatePostButton"
+        style={{ textAlign: "right", marginTop: "20px", left: "1200px" }}
+      >
+        <div className="nounderline" onClick={DataPost}>
+          <Link to="/" className="goback">
+            {"POST"}
+          </Link>
+        </div>
       </div>
     </div>
   );
