@@ -16,7 +16,7 @@ const Postbox =(props) => {
   return (
     <div className='Postbox'>
       <span className='Title'>{props.title}</span>
-      <img src={pinIcon} alt='pin' className='bookmark'/>
+      <span className='top'><img src={pinIcon} alt='pin' className='bookmark'/></span>
       <p className='date'>{props.date}</p>
       <hr/>
         {
@@ -31,7 +31,6 @@ const Postbox =(props) => {
         <div className='transparent'></div>
         <br/>
       
-      {isVilified?<></>:<></>}
       <span className='CLV'>
       {
           props.isVerify?<span className='text'><img src={verifyIcon} alt='verify' className='verify'/>Answer Vilified</span> :<></>
@@ -40,7 +39,7 @@ const Postbox =(props) => {
         <span className='text'>{props.comment}</span>
         <img src={heartIcon} alt='heart' className='heart'/>
         <span className='text'>{props.like}</span>
-        <Link to="/Post" className='viewButton'>View</Link>
+        <Link to={"/Post/"+2} className='viewButton'>View</Link>
             
 
       </span>

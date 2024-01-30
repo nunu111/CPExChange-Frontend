@@ -21,7 +21,7 @@ function App() {
           }
         />
         <Route
-          path="/Post"
+          path="/Post/:PID"
           element={
             <Postpage isLogin={isLogin} nowLogin={nowLogin} Logout={logout} />
           }
