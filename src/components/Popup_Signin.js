@@ -4,7 +4,7 @@ import "./popup.css";
 import "./index.css";
 import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
-import Signin1 from "./Popup_Signin1";
+
 import XIcon from "./Icon/X.svg";
 import { SigninFunc } from "./function/Signinfunc";
 const Signin = (props) => {
@@ -51,11 +51,17 @@ const Signin = (props) => {
       setPasswordError("Password does not match");
       return;
     }
-    
+
     // Assuming login is successful, you can close the popup
     setIsSignin(SigninState1(email, password, displayname));
     props.LoginState();
     togglePopupVisibility();
+  };
+
+  const handleKeyPress1 = (event) => {
+    if (event.key === "Enter") {
+      onButtonClick1();
+    }
   };
 
   return (
@@ -86,6 +92,7 @@ const Signin = (props) => {
                       value={displayname}
                       placeholder="Enter your Displayname here"
                       onChange={(ev) => setDisplayname(ev.target.value)}
+                      onKeyPress={handleKeyPress1}
                       className={"inputBox"}
                     />
                     <label className="errorLabel">{displaynameError}</label>
@@ -98,6 +105,7 @@ const Signin = (props) => {
                       value={email}
                       placeholder="Enter your username here"
                       onChange={(ev) => setEmail(ev.target.value)}
+                      onKeyPress={handleKeyPress1}
                       className={"inputBox"}
                     />
                     <label className="errorLabel">{emailError}</label>
@@ -110,6 +118,7 @@ const Signin = (props) => {
                       value={password}
                       placeholder="Enter your password here"
                       onChange={(ev) => setPassword(ev.target.value)}
+                      onKeyPress={handleKeyPress1}
                       className={"inputBox"}
                     />
                     <label className="errorLabel">{passwordError}</label>
@@ -122,6 +131,7 @@ const Signin = (props) => {
                       value={password1}
                       placeholder="Enter your Confirm password here"
                       onChange={(ev) => setPassword1(ev.target.value)}
+                      onKeyPress={handleKeyPress1}
                       className={"inputBox"}
                     />
                     <label className="errorLabel">{passwordError}</label>
@@ -141,7 +151,6 @@ const Signin = (props) => {
           </div>,
           document.body
         )}
-      
     </>
   );
 };
