@@ -13,8 +13,6 @@ const Login = (props) => {
   const [passwordError, setPasswordError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
 
-  const navigate = useNavigate();
-
   const onButtonClick = () => {
     // Set initial error values to empty
     setEmailError("");
