@@ -3,7 +3,7 @@ import ProfileButton from "./profilebar/ProfileButton";
 import registerIcon from "./Icon/register.svg";
 import Popup_Signin from "./Popup_Signin";
 
-const SigninButton = () => {
+const SigninButton = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopupVisibility = () => {
@@ -12,7 +12,7 @@ const SigninButton = () => {
 
   const onClick = () => {
     togglePopupVisibility();
-    console.log("ass");
+    
   };
 
   return (
@@ -23,6 +23,7 @@ const SigninButton = () => {
       <Popup_Signin
         isPopupVisible={isPopupVisible}
         togglePopupVisibility={togglePopupVisibility}
+        LoginState={props.LoginState}
       />
     </div>
   );

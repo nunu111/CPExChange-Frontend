@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-
+import Latex from "react-latex";
 function Editor({ onChange, editorLoaded, name, value }) {
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
@@ -13,9 +13,10 @@ function Editor({ onChange, editorLoaded, name, value }) {
 
   return (
     <div>
+      {/* <Latex>{"$V_c = V_s(1 - 10^{-\\frac{t}{T}})$"}</Latex> */}
       {editorLoaded ? (
         <CKEditor
-          type=""
+          type="wefefw"
           name={name}
           editor={ClassicEditor}
           config={{
