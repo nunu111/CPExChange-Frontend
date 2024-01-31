@@ -17,6 +17,7 @@ export default function Post(props) {
     detail: "",
     date: "",
     tag: [],
+    like: 0,
   });
 
   const getPostAPI = () => {
@@ -53,7 +54,7 @@ export default function Post(props) {
               console.log(postsection);
             }}
           />
-          <span className="text">{10}</span>
+          <span className="text">{postsection.like}</span>
           <img src={pinIcon} alt="pin" className="bookmark" />
         </div>
         <p className="date">{postsection.date}</p>
