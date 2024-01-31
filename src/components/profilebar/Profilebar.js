@@ -15,15 +15,21 @@ import logoutIcon from "../Icon/logout.svg";
 import notiIcon from "../Icon/noti.svg";
 import editIcon from "../Icon/edit.svg";
 import PopupExit from "./PopupExit";
+import PopupEdit from "./PopupEdit";
 
 const ProfileBar = (props) => {
   const [logoutPopupVisible, setLogoutPopupVisible] = useState(false);
+  const [editPopupVisible, setEditPopupVisible] = useState(false);
 
   function logout() {
     // You can perform any additional logout logic here
     props.Logout();
     // Close the popup after logout
     setLogoutPopupVisible(false);
+  }
+
+  function Edit() {
+    setEditPopupVisible(false);
   }
 
   return (
@@ -41,7 +47,7 @@ const ProfileBar = (props) => {
               <span className="icon">
                 <img src={notiIcon} alt="noti" />
               </span>
-              <span className="icon">
+              <span onClick={() => setEditPopupVisible(true)} className="icon">
                 <img src={editIcon} alt="edit" />
               </span>
               <span
@@ -56,11 +62,17 @@ const ProfileBar = (props) => {
             </div>
           ) : (
             <div>
-              <LoginButton LoginState={props.nowLogin}/>
-              <SigninButton LoginState={props.nowLogin}/>
+              <LoginButton LoginState={props.nowLogin} />
+              <SigninButton LoginState={props.nowLogin} />
             </div>
           )}
         </>
+
+        <PopupEdit
+          visible={editPopupVisible}
+          onClose={() => setEditPopupVisible(false)}
+          onEdit={Edit}
+        />
 
         {/* Logout Popup */}
         <PopupExit
