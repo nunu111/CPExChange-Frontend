@@ -10,7 +10,6 @@ const Postbox =(props) => {
   const [isVilified,setIsVilified] =useState(false)
   const [PID,setPID] = useState(null);
  useEffect(()=>{
-   setTag(props.taglist)
    setPID(props.PID)
  },[])
 
@@ -19,10 +18,10 @@ const Postbox =(props) => {
     <div className='Postbox'>
       <span className='Title'>{props.title}</span>
       <span className='top'><img src={pinIcon} alt='pin' className='bookmark'/></span>
-      <p className='date'>{props.date}</p>
+      <p className='date'>{props.date} by {props.bywho}</p>
       <hr/>
         {
-          Tags.map((Tag,i)=>{
+          props.taglist.map((Tag,i)=>{
             return <PostTag TagName={Tag} key={i}/>
           })
         } 

@@ -17,17 +17,8 @@ const Login = (props) => {
   const LoginAPI = async()=>  {
     const AUTH_TOKEN = 'Basic'
     const sending = {
-      //headers: {
-      //  'Content-Type': 'application/json',
-      //  'Accept': 'application/json',
-      //  'Authorization': AUTH_TOKEN
-      //},
-      //data: {
-        username,
-        password
-      //},
-      //params: {}
-      
+      username,
+      password
     };
     console.log(JSON.stringify(sending));
       const resp = await axios.post(serverIP, sending).then((res) => {
@@ -35,7 +26,7 @@ const Login = (props) => {
       }).catch((err) => {
         console.error("Error:", err);
       });
-      console.log("check", resp);
+      
     
   }
 
