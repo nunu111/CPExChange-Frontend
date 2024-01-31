@@ -16,14 +16,31 @@ import notiIcon from "../Icon/noti.svg";
 import editIcon from "../Icon/edit.svg";
 import PopupExit from "./PopupExit";
 import PopupEdit from "./PopupEdit";
+import axios from "axios";
 
 const ProfileBar = (props) => {
   const [logoutPopupVisible, setLogoutPopupVisible] = useState(false);
   const [editPopupVisible, setEditPopupVisible] = useState(false);
 
+const LogoutAPI = async () => {
+  const serverIP = "http://192.168.116.101:8080";
+  const cookie = localStorage.getItem("cookie");
+  const resp = await axios
+    .post(serverIP + "/users/logout", {
+      cookie
+    })
+    .then((res) => {
+      console.log("res", res.data);
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+}
+
   function logout() {
     // You can perform any additional logout logic here
     props.Logout();
+
     // Close the popup after logout
     setLogoutPopupVisible(false);
   }

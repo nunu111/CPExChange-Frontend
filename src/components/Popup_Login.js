@@ -13,9 +13,8 @@ const Login = (props) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
-  const serverIP = "http://192.168.116.101:8080/guest/login";
+  const serverIP = "http://192.168.116.101:8080//guests/login";
   const LoginAPI = async()=>  {
-    const AUTH_TOKEN = 'Basic'
     const sending = {
       username,
       password
@@ -26,8 +25,6 @@ const Login = (props) => {
       }).catch((err) => {
         console.error("Error:", err);
       });
-      
-    
   }
 
   const onButtonClick = (event) => {

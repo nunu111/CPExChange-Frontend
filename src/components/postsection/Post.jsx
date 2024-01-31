@@ -7,11 +7,12 @@ import PostTag from "../posttag";
 import Comment from "./Comment";
 import "./Comment.css";
 import Postfunc from "../function/Postfunc";
+import axios from "axios";
 export default function Post(props) {
   const { PostListAPI, PostAPI, getPostdetail, UpdatePost } = Postfunc();
   const params = useParams();
   const PID = params.PID;
-  const [Tags, setTag] = useState(["ไก่ย่าง", "เล่นเกมที่บ้าน"]);
+
   const [postsection, setPostsection] = useState({
     title: "",
     detail: "",
@@ -20,7 +21,15 @@ export default function Post(props) {
     like: 0,
   });
 
-  const getPostAPI = () => {
+  const getPostAPI = async () => {
+    const serverIP = "http://192.168.116.101:8080";
+    const resp = await axios
+      .post(serverIP + "/posts?postId={post_id}", {
+        postID: params.PID,
+      })
+      .then((res) => {})
+      .catch((err) => {});
+
     setPostsection({
       ...postsection,
       title: "title",

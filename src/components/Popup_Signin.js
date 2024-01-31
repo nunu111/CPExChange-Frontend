@@ -6,10 +6,11 @@ import "../pages/Mainpage.css";
 import ReactDOM from "react-dom";
 import XIcon from "./Icon/X.svg";
 import { SigninFunc } from "./function/Signinfunc";
+import axios from "axios";
 
 const Signin = (props) => {
   const { SigninState1 } = SigninFunc();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -18,10 +19,23 @@ const Signin = (props) => {
   const [displaynameError, setDisplaynameError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
   const [isSignin, setIsSignin] = useState(false);
-  const navigate = useNavigate();
 
-  const SigninAPI = () => {
-    const serverIP = "http://192.168.116.101:8080/guest/signin/";
+
+  const SigninAPI = async() => {
+    const serverIP = "http://192.168.116.101:8080";
+    const sending = {
+      username,
+      displayname,
+      password
+    };
+
+      const resp = await axios.post(serverIP+"/guests/signin/", sending).then((res) => {
+        console.log("res", res.data);
+        props.LoginState();
+      }).catch((err) => {
+        console.error("Error:", err);
+      });
+
   };
 
   const onButtonClick1 = () => {
@@ -31,7 +45,7 @@ const Signin = (props) => {
     setDisplaynameError("");
 
     // Check if the user has entered both fields correctly
-    if ("" === email) {
+    if ("" === username) {
       setEmailError("Please enter your username");
       return;
     }
@@ -57,8 +71,8 @@ const Signin = (props) => {
     }
 
     // Assuming login is successful, you can close the popup
-    setIsSignin(SigninState1(email, password, displayname));
-    props.LoginState();
+    setIsSignin(SigninState1(username, password, displayname));
+    SigninAPI();
     togglePopupVisibility();
   };
 
@@ -123,9 +137,9 @@ const Signin = (props) => {
                   <div className={"inputContainer"}>
                     Username
                     <input
-                      value={email}
+                      value={username}
                       placeholder="Enter your username here"
-                      onChange={(ev) => setEmail(ev.target.value)}
+                      onChange={(ev) => setUsername(ev.target.value)}
                       onKeyPress={handleKeyPress1}
                       className={"inputBox"}
                     />
