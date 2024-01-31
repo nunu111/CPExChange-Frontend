@@ -85,10 +85,10 @@ const ProfileBar = (props) => {
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
         <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
         {props.isLogin() && (
-          <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={""} />
+          <ProfileButton Detail="โพสต์ของฉัน" Img={mypostIcon} path={"/my-post"} />
         )}
         {props.isLogin() && (
-          <ProfileButton Detail="ที่บันทึกไว้" Img={mybookmarkIcon} path={""} />
+          <ProfileButton Detail="ที่บันทึกไว้" Img={mybookmarkIcon} path={"/bookmark"} />
         )}
         <div className="copyright">
           Copyright © 2023 ·
