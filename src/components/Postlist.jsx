@@ -7,15 +7,30 @@ import { Link } from "react-router-dom";
 const PostList = (props) => {
   const [PostList, setPostList] = useState([]);
 
+  const [isFetching, setIsFetching] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      // Check if the user has reached the bottom of the page
-      const isBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      // Calculate the distance from the bottom
+      const distanceFromBottom =
+        document.documentElement.scrollHeight -
+        (window.innerHeight + document.documentElement.scrollTop);
 
-      if (isBottom) {
-        console.log("Reached the bottom of the page!");
-        // Perform any action when the user reaches the bottom
+      // Define a threshold for triggering the fetch (adjust as needed)
+      const threshold = 100;
+
+      // Check if the user has reached the bottom of the page
+      if (distanceFromBottom < threshold && !isFetching) {
+        setIsFetching(true);
+        console.log(1);
+        // Simulate fetching more data (replace with your actual fetching logic)
+        // For demonstration purposes, we're using a setTimeout here
+        setTimeout(() => {
+          // Your data fetching logic goes here
+
+          // Set isFetching back to false after fetching is complete
+          setIsFetching(false);
+        }, 1000); // Adjust the delay as needed
       }
     };
 
@@ -26,7 +41,7 @@ const PostList = (props) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isFetching]);
 
   return (
     <div className="Mainbox">
@@ -65,6 +80,87 @@ const PostList = (props) => {
         like="10"
         PID={2}
       />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      <Postbox
+        title="อยากกินไก่จังนะครับ"
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail="โจทย์คือ อยากกินไก่จังนะครับยากมากเลยครับ"
+        date="โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77"
+        isVerify={true}
+        comment="1000"
+        like="10"
+        PID={2}
+      />
+      {isFetching && <p>Loading more data...</p>}
       {/* <Postbox/>
         <Postbox/>
         <Postbox/>
