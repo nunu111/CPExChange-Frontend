@@ -17,13 +17,22 @@ export default function Post(props) {
     detail: "",
     date: "",
     tag: [],
+    like: 0,
   });
 
+  const getPostAPI = () => {
+    setPostsection({
+      ...postsection,
+      title: "title",
+      date: "โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77",
+      detail:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      tag: ["ไก่ย่าง", "เล่นเกมที่บ้าน"],
+    });
+  };
+
   useEffect(() => {
-    const inni = getPostdetail();
-    setPostsection({ ...postsection, title: inni });
-    console.log("pass1", getPostdetail());
-    console.log("pass2", postsection);
+    getPostAPI();
   }, []);
 
   return (
@@ -45,14 +54,12 @@ export default function Post(props) {
               console.log(postsection);
             }}
           />
-          <span className="text">{10}</span>
+          <span className="text">{postsection.like}</span>
           <img src={pinIcon} alt="pin" className="bookmark" />
         </div>
-        <p className="date">
-          {postsection.date}โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77
-        </p>
+        <p className="date">{postsection.date}</p>
         <hr />
-        {Tags.map((Tag, i) => {
+        {postsection.tag.map((Tag, i) => {
           return <PostTag TagName={Tag} key={i} />;
         })}
         <br />

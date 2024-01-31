@@ -128,10 +128,12 @@
   text-decoration: none;
 }
 .CreatePostButton {
+  display: block;
   margin-bottom: 18px;
   font-size: 30px;
   position: relative;
-
+  color: #000000;
+  text-decoration: none;
   cursor: pointer;
   font-size: 20px;
   background-color: #ffffff;
@@ -169,10 +171,7 @@
   font-size: 40px;
   padding: 10px;
 }
-.nounderline {
-  color: #000000;
-  text-decoration: none;
-}
+
 
 .CreatePostButtonContainer {
   text-align: right;
