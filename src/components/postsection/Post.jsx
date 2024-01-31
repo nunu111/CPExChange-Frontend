@@ -19,9 +19,12 @@ export default function Post(props) {
     tag: [],
   });
 
+  const getPostAPI = () => {
+    setPostsection({ ...postsection, title: "title", detail: "detail" });
+  };
+
   useEffect(() => {
-    const inni = getPostdetail();
-    setPostsection({ ...postsection, title: inni });
+    getPostAPI();
     console.log("pass1", getPostdetail());
     console.log("pass2", postsection);
   }, []);

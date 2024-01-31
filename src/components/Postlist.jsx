@@ -34,6 +34,7 @@ const PostList = (props) => {
         isVerify={false}
         comment="10"
         like="10"
+        PID={1}
       />
       <Postbox
         title="อยากกินไก่จังนะครับ"
@@ -43,6 +44,7 @@ const PostList = (props) => {
         isVerify={true}
         comment="1000"
         like="10"
+        PID={2}
       />
       {/* <Postbox/>
         <Postbox/>

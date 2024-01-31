@@ -8,9 +8,10 @@ import { Link, Route, Router } from 'react-router-dom'
 const Postbox =(props) => {
   const [Tags,setTag] = useState([])
   const [isVilified,setIsVilified] =useState(false)
-
+  const [PID,setPID] = useState(null);
  useEffect(()=>{
    setTag(props.taglist)
+   setPID(props.PID)
  },[])
 
   return (
@@ -39,7 +40,7 @@ const Postbox =(props) => {
         <span className='text'>{props.comment}</span>
         <img src={heartIcon} alt='heart' className='heart'/>
         <span className='text'>{props.like}</span>
-        <Link to={"/Post/"+2} className='viewButton'>View</Link>
+        <Link to={"/Post/"+PID} className='viewButton'>View</Link>
             
 
       </span>
