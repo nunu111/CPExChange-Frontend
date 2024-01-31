@@ -21,6 +21,12 @@ const Signin = (props) => {
   const [isSignin, setIsSignin] = useState(false);
   const navigate = useNavigate();
 
+const SigninAPI=()=>{
+
+  const serverIP = "http://192.168.116.101:8080/guest/signin/";
+}
+
+
   const onButtonClick1 = () => {
     // Set initial error values to empty
     setEmailError("");

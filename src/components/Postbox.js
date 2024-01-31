@@ -14,6 +14,7 @@ const Postbox =(props) => {
    setPID(props.PID)
  },[])
 
+
   return (
     <div className='Postbox'>
       <span className='Title'>{props.title}</span>

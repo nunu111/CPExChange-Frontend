@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Postlist.css";
 import Postbox from "./Postbox";
 import editIcon from "./Icon/editbig.svg";
@@ -7,15 +7,34 @@ import { Link } from "react-router-dom";
 const PostList = (props) => {
   const [PostList, setPostList] = useState([]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has reached the bottom of the page
+      const isBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+
+      if (isBottom) {
+        console.log("Reached the bottom of the page!");
+        // Perform any action when the user reaches the bottom
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="Mainbox">
       {props.isLogin() && (
         <div>
-          <Link to="/Create-Post" className="nounderline">
-            <div className="CreatePostButton">
-              <img src={editIcon} className="icon" alt="edit" />
-              <span className="text">เขียนโพสต์...</span>
-            </div>
+          <Link to="/Create-Post" className="CreatePostButton">
+            <img src={editIcon} className="icon" alt="edit" />
+            <span className="text">เขียนโพสต์...</span>
           </Link>
         </div>
       )}
