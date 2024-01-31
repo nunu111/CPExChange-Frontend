@@ -18,7 +18,7 @@ const Postbox =(props) => {
     <div className='Postbox'>
       <span className='Title'>{props.title}</span>
       <span className='top'><img src={pinIcon} alt='pin' className='bookmark'/></span>
-      <p className='date'>{props.date} by {props.bywho}</p>
+      <p className='date'>{props.date} by {props.displayname}</p>
       <hr/>
         {
           props.taglist.map((Tag,i)=>{

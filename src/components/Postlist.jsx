@@ -10,14 +10,14 @@ const PostList = (props) => {
     {
       title: "Post test",
       taglist: ["เนื้อหา 1", "เนื้อหา 2"],
-      detail:
+      Posterusername:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "when",
+      Createdate: "when",
       bywho: "Username77",
-      isVerify: false,
-      comment: 10,
-      like: 10,
-      PID: 1,
+      isVerified: false,
+      Comment: 10,
+      Like: 10,
+      PostID: 1,
     },
   ]);
 
@@ -30,14 +30,14 @@ const PostList = (props) => {
       {
         title: "อยากกินไก่จังนะครับ",
         taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
-        detail:
+        Posterusername:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        date: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
+        Createdate: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
         bywho: "Username77",
-        isVerify: true,
-        comment: 25,
-        like: 1000,
-        PID: 2,
+        isVerified: true,
+        Comment: 25,
+        Like: 1000,
+        PostID: 2,
       },
     ]);
 
@@ -112,13 +112,13 @@ const PostList = (props) => {
           <Postbox
             title={Post.title}
             taglist={Post.taglist}
-            detail={Post.detail}
-            date={Post.date}
-            isVerify={Post.isVerify}
-            comment={Post.comment}
-            like={Post.like}
+            detail={Post.Posterusername}
+            date={Post.Createdate}
+            isVerify={Post.isVerified}
+            comment={Post.Comment}
+            like={Post.Like}
             bywho={Post.bywho}
-            PID={Post.PID}
+            PID={Post.PostID}
             key={i}
           />
         );
