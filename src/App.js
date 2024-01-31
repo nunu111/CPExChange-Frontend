@@ -4,12 +4,22 @@ import Homepage from "./pages/Homepage";
 import Postpage from "./pages/Postpage";
 import { Login } from "./components/function/Login";
 import CreatePostpage from "./pages/CreatePostpage";
+import MyPostPage from "./pages/MyPostPage";
+import BookmarkPage from "./pages/BookmarkPage";
 function App() {
   const { nowLogin, isLogin, logout } = Login();
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/my-post" element={<MyPostPage 
+              isLogin={isLogin}
+              nowLogin={nowLogin}
+              Logout={logout}/>}/>
+        <Route path="/bookmark" element={<BookmarkPage 
+              isLogin={isLogin}
+              nowLogin={nowLogin}
+              Logout={logout}/>}/>
         <Route
           path="/Create-Post"
           element={
