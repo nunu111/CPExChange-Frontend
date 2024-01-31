@@ -10,10 +10,10 @@ const PostList = (props) => {
     {
       title: "Post test",
       taglist: ["เนื้อหา 1", "เนื้อหา 2"],
-      Posterusername:
+      detail:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       Createdate: "when",
-      bywho: "Username77",
+      displayname: "Username77",
       isVerified: false,
       Comment: 10,
       Like: 10,
@@ -30,10 +30,10 @@ const PostList = (props) => {
       {
         title: "อยากกินไก่จังนะครับ",
         taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
-        Posterusername:
+        detail:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         Createdate: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
-        bywho: "Username77",
+        displayname: "Username77",
         isVerified: true,
         Comment: 25,
         Like: 1000,
@@ -47,6 +47,25 @@ const PostList = (props) => {
   const serverIP = "http://";
 
   const getPageAPI = async () => {
+    setPostList([
+      ...PostList,
+      {
+        title: "อยากกินไก่จังนะครับ",
+        taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
+        detail:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        Createdate: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
+        displayname: "Username77",
+        isVerified: true,
+        Comment: 25,
+        Like: 1000,
+        PostID: 2,
+      },
+    ]);
+    window.scrollTo({
+      top: document.documentElement.scrollTop - 60, // Adjust the value as needed
+      behavior: "smooth", // Use 'auto' for instant scroll or 'smooth' for smooth scroll
+    });
     const resp = await axios
       .get(serverIP + "/posts?page=" + page)
       .then((res) => {
@@ -64,7 +83,7 @@ const PostList = (props) => {
         document.documentElement.scrollHeight -
         (window.innerHeight + document.documentElement.scrollTop);
       // Define a threshold for triggering the fetch (adjust as needed)
-      const threshold = 100;
+      const threshold = 300;
       // Check if the user has reached the bottom of the page
       if (distanceFromBottom < threshold && !isFetching) {
         setIsFetching(true);
@@ -112,18 +131,69 @@ const PostList = (props) => {
           <Postbox
             title={Post.title}
             taglist={Post.taglist}
-            detail={Post.Posterusername}
+            detail={Post.detail}
             date={Post.Createdate}
             isVerify={Post.isVerified}
             comment={Post.Comment}
             like={Post.Like}
-            bywho={Post.bywho}
+            bywho={Post.displayname}
             PID={Post.PostID}
             key={i}
           />
         );
       })}
-
+      <Postbox
+        title={"อยากกินไก่จังนะครับ"}
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
+        isVerify={true}
+        comment={1255}
+        like={10}
+        bywho={"Username77"}
+        PID={2}
+      />
+      <Postbox
+        title={"อยากกินไก่จังนะครับ"}
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
+        isVerify={true}
+        comment={1255}
+        like={10}
+        bywho={"Username77"}
+        PID={2}
+      />
+      <Postbox
+        title={"อยากกินไก่จังนะครับ"}
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
+        isVerify={true}
+        comment={1255}
+        like={10}
+        bywho={"Username77"}
+        PID={2}
+      />
+      <Postbox
+        title={"อยากกินไก่จังนะครับ"}
+        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
+        detail={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
+        isVerify={true}
+        comment={1255}
+        like={10}
+        bywho={"Username77"}
+        PID={2}
+      />
       {isFetching && <p>Loading more data...</p>}
       {/* <Postbox/>
         <Postbox/>
