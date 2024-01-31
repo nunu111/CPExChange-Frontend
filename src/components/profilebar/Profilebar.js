@@ -40,7 +40,7 @@ const ProfileBar = (props) => {
           ) : (
             <div>
               <LoginButton LoginState={props.nowLogin}/>
-              <SigninButton />
+              <SigninButton LoginState={props.nowLogin}/>
             </div>
           )}
         </>

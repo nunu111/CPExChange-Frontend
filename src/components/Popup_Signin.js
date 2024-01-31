@@ -20,7 +20,7 @@ const Signin = (props) => {
   const [isSignin, setIsSignin] = useState(false);
   const navigate = useNavigate();
 
-  const onButtonClick1 = (props) => {
+  const onButtonClick1 = () => {
     // Set initial error values to empty
     setEmailError("");
     setPasswordError("");
@@ -51,8 +51,10 @@ const Signin = (props) => {
       setPasswordError("Password does not match");
       return;
     }
+    
     // Assuming login is successful, you can close the popup
     setIsSignin(SigninState1(email, password, displayname));
+    props.LoginState();
     togglePopupVisibility();
   };
 
@@ -139,13 +141,7 @@ const Signin = (props) => {
           </div>,
           document.body
         )}
-      {isSignin ? (
-        <>
-          <Signin1 />
-        </>
-      ) : (
-        <>1150</>
-      )}
+      
     </>
   );
 };
