@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
@@ -44,8 +44,25 @@ const Login = (props) => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       onButtonClick();
+    } else if (event.key === "Escape") {
+      togglePopupVisibility();
     }
   };
+
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === "Escape" && isPopupVisible) {
+        togglePopupVisibility();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscKey);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  }, [isPopupVisible, togglePopupVisibility]);
 
   return isPopupVisible ? (
     ReactDOM.createPortal(

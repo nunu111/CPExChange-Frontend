@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 
 import XIcon from "./Icon/X.svg";
 import { SigninFunc } from "./function/Signinfunc";
+
 const Signin = (props) => {
   const { SigninState1 } = SigninFunc();
   const [email, setEmail] = useState("");
@@ -61,8 +62,26 @@ const Signin = (props) => {
   const handleKeyPress1 = (event) => {
     if (event.key === "Enter") {
       onButtonClick1();
+    } else if (event.key === "Escape") {
+      togglePopupVisibility();
     }
   };
+
+  // Add an event listener for the Escape key when the component mounts
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === "Escape" && isPopupVisible) {
+        togglePopupVisibility();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscKey);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  }, [isPopupVisible, togglePopupVisibility]);
 
   return (
     <>
@@ -87,7 +106,7 @@ const Signin = (props) => {
                   />
                   <br />
                   <div className={"inputContainer"}>
-                    displayname
+                    Displayname
                     <input
                       value={displayname}
                       placeholder="Enter your Displayname here"
@@ -97,7 +116,6 @@ const Signin = (props) => {
                     />
                     <label className="errorLabel">{displaynameError}</label>
                   </div>
-                  <br />
                   <br />
                   <div className={"inputContainer"}>
                     Username
@@ -125,7 +143,7 @@ const Signin = (props) => {
                   </div>
                   <br />
                   <div className={"inputContainer"}>
-                    Comfirm Password
+                    Confirm Password
                     <input
                       type="password"
                       value={password1}
