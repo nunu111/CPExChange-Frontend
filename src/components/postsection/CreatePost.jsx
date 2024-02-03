@@ -9,6 +9,7 @@ import axios from "axios";
 export default function CreatePost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
+  const [topic, setTopic] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
 
   const createPostAPI = async () => {
@@ -32,12 +33,17 @@ export default function CreatePost(props) {
 
   const DataPost = () => {
     createPostAPI();
+    console.log(topic);
     console.log(data);
     console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
   };
 
+  // const TopicPost = () => {
+  //   console.log(data);
+  // }
+
   const handleGoBack = () => {
-    // Show the popup when the user clicks on "< ย้อนกลับ"
+    // Show the popup when the user clicks "< ย้อนกลับ"
     setPopupVisible(true);
   };
 
@@ -47,9 +53,6 @@ export default function CreatePost(props) {
   };
 
   const handleConfirmGoBack = () => {
-    // Add logic for confirming go back, e.g., navigating to the previous page
-    // ...
-
     // Close the popup after handling the confirmation
     setPopupVisible(false);
   };
@@ -77,6 +80,7 @@ export default function CreatePost(props) {
           label="TOPIC"
           id="fullWidth"
           style={{ width: "1250px" }}
+          onChange={(e) => setTopic(e.target.value)}
         />
       </div>
       <br />
