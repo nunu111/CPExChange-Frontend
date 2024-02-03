@@ -47,9 +47,18 @@
 .top .like {
   height: 25px;
   cursor: pointer;
+  transition: 0.2s
+  
+}
+.top .like:hover {
+  transform: scale(1.2);
+}
+.top .like:active {
+  transform: scale(1);
 }
 .top .text {
   font-size: 35px;
+  margin-left: 10px;
   color: #afafaf;
 }
 
@@ -95,11 +104,11 @@
   position: relative;
   top: 4px;
   width: 25px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .CLV .heart {
   margin: 0 5px 0 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
   width: 25px;
 }
 .CLV .text {

@@ -5,6 +5,7 @@ import editIcon from "./Icon/editbig.svg";
 import CreatePost from "./postsection/CreatePost";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { IPconfig } from "./function/IPconfig";
 const PostList = (props) => {
   const [PostList, setPostList] = useState([
     {
@@ -23,49 +24,49 @@ const PostList = (props) => {
 
   const [isFetching, setIsFetching] = useState(false);
   const [page, setPage] = useState(1);
-
+  const { getIP } = IPconfig();
   useEffect(() => {
     getPageAPI();
 
     console.log(PostList);
   }, []);
 
-  const serverIP = "http://192.168.116.101:8080";
+  const serverIP = getIP();
 
   const getPageAPI = async () => {
-    const resp = await axios
-      .get(serverIP + "/pages?page=" + page)
-      .then((res) => {
-        console.log("res", res.data);
+    // const resp = await axios
+    //   .get(serverIP + "/pages?page=" + page)
+    //   .then((res) => {
+    //     console.log("res", res.data);
 
-        const test = res.data[0];
-        test.taglist = [];
+    //     const test = res.data[0];
+    //     test.taglist = [];
 
-        const testz = res.data[1];
-        testz.taglist = [];
-        setPostList([...PostList, test, testz]);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
+    //     const testz = res.data[1];
+    //     testz.taglist = [];
+    //     setPostList([...PostList, test, testz]);
+    //   })
+    //   .catch((err) => {
+    //     console.error("Error:", err);
+    //   });
 
-    // setPostList([
-    //   ...PostList,
-    //   {
-    //     Topic: "อยากกินไก่จังนะครับ",
-    //     taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
-    //     Detail:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    //     TimeStamp: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
-    //     postOwner: "Username77",
-    //     hasVerify: true,
-    //     Comment: 25,
-    //     LikeCount: 1000,
-    //     postID: 2,
-    //   },
-    // ]);
+    setPostList([
+      ...PostList,
+      {
+        Topic: "PPAP",
+        taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
+        Detail:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        TimeStamp: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
+        postOwner: "Username77",
+        hasVerify: true,
+        Comment: 25,
+        LikeCount: 1000,
+        postID: 2,
+      },
+    ]);
     window.scrollTo({
-      top: document.documentElement.scrollTop - 60, // Adjust the value as needed
+      top: document.documentElement.scrollTop - 80, // Adjust the value as needed
       behavior: "smooth", // Use 'auto' for instant scroll or 'smooth' for smooth scroll
     });
   };
@@ -77,7 +78,7 @@ const PostList = (props) => {
         document.documentElement.scrollHeight -
         (window.innerHeight + document.documentElement.scrollTop);
       // Define a threshold for triggering the fetch (adjust as needed)
-      const threshold = 300;
+      const threshold = 100;
       // Check if the user has reached the bottom of the page
       if (distanceFromBottom < threshold && !isFetching) {
         setIsFetching(true);
@@ -135,7 +136,7 @@ const PostList = (props) => {
           />
         );
       })}
-      <Postbox
+      {/* <Postbox
         title={"อยากกินไก่จังนะครับ"}
         taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
         detail={
@@ -174,7 +175,7 @@ const PostList = (props) => {
         like={10}
         bywho={"Username77"}
         PID={4}
-      />
+      /> */}
       <Postbox
         title={"อยากกินไก่จังนะครับ"}
         taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
