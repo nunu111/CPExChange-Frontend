@@ -5,14 +5,14 @@ import TextField from "@mui/material/TextField";
 import Editor from "./Editor";
 import PopupExitPost from "./PopupExitPost";
 import axios from "axios";
-
+import { IPconfig } from "../function/IPconfig";
 export default function CreatePost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
-
+  const { getIP } = IPconfig();
   const createPostAPI = async () => {
-    const serverIP = "http://192.168.116.101:8080";
+    const serverIP = getIP();
 
     const resp = await axios
       .post(serverIP + "/posts/create", {

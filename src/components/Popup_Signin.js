@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 import XIcon from "./Icon/X.svg";
 import { SigninFunc } from "./function/Signinfunc";
 import axios from "axios";
-
+import { IPconfig } from "./function/IPconfig";
 const Signin = (props) => {
   const { SigninState1 } = SigninFunc();
   const [username, setUsername] = useState("");
@@ -19,10 +19,10 @@ const Signin = (props) => {
   const [displaynameError, setDisplaynameError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
   const [isSignin, setIsSignin] = useState(false);
-
-
+  const { getIP } = IPconfig();
   const SigninAPI = async() => {
-    const serverIP = "http://192.168.116.101:8080";
+    
+    const serverIP = getIP();
     const sending = {
       userName : username,
       displayName : displayname,

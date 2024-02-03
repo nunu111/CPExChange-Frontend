@@ -7,20 +7,22 @@ import ReactDOM from "react-dom";
 import logo from "./Icon/logo.svg";
 import XIcon from "./Icon/X.svg";
 import axios from "axios";
+import { IPconfig } from "./function/IPconfig";
 const Login = (props) => {
+  const { getIP } = IPconfig();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
-  const serverIP = "http://192.168.116.101:8080/guests/login";
+  const serverIP = getIP();
   const LoginAPI = async()=>  {
     const sending = {
       userName : username,
       password 
     };
     console.log(JSON.stringify(sending));
-      const resp = await axios.post(serverIP, sending).then((res) => {
+      const resp = await axios.post(serverIP+"/guests/login", sending).then((res) => {
         console.log("res", res.data);
         if(res.data.status === 200){
           props.LoginState(res.data.displayName);
