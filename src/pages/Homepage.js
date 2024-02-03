@@ -9,6 +9,7 @@ function Homepage(props) {
         isLogin={props.isLogin}
         nowLogin={props.nowLogin}
         Logout={props.Logout}
+        getName={props.getName}
       />
       <PostList isLogin={props.isLogin} />
     </div>

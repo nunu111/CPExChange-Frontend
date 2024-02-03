@@ -7,7 +7,7 @@ import CreatePostpage from "./pages/CreatePostpage";
 import MyPostPage from "./pages/MyPostPage";
 import BookmarkPage from "./pages/BookmarkPage";
 function App() {
-  const { nowLogin, isLogin, logout } = Login();
+  const { nowLogin, isLogin, logout ,getName } = Login();
 
   return (
     <BrowserRouter>
@@ -15,11 +15,13 @@ function App() {
         <Route path="/my-post" element={<MyPostPage 
               isLogin={isLogin}
               nowLogin={nowLogin}
-              Logout={logout}/>}/>
+              Logout={logout}
+              getName={getName}/>}/>
         <Route path="/bookmark" element={<BookmarkPage 
               isLogin={isLogin}
               nowLogin={nowLogin}
-              Logout={logout}/>}/>
+              Logout={logout}
+              getName={getName}/>}/>
         <Route
           path="/Create-Post"
           element={
@@ -27,20 +29,21 @@ function App() {
               isLogin={isLogin}
               nowLogin={nowLogin}
               Logout={logout}
+              getName={getName}
             />
           }
         />
         <Route
           path="/Post/:PID"
           element={
-            <Postpage isLogin={isLogin} nowLogin={nowLogin} Logout={logout} />
+            <Postpage isLogin={isLogin} nowLogin={nowLogin} Logout={logout} getName={getName} />
           }
         />
 
         <Route
           path="/"
           element={
-            <Homepage isLogin={isLogin} nowLogin={nowLogin} Logout={logout} />
+            <Homepage isLogin={isLogin} nowLogin={nowLogin} Logout={logout}  getName={getName}/>
           }
         >
           {/* <Route path="blogs" element={<Blogs />} />

@@ -5,7 +5,7 @@ import './Mainpage.css'
 export default function post(props) {
   return (
     <div className="mainbody">
-      <ProfileBar isLogin={props.isLogin} nowLogin={props.nowLogin} Logout={props.Logout}/>
+      <ProfileBar isLogin={props.isLogin} nowLogin={props.nowLogin} Logout={props.Logout} getName={props.getName}/>
       <Post/>
     </div>
   );

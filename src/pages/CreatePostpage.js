@@ -10,6 +10,7 @@ function CreatePostpage(props) {
         isLogin={props.isLogin}
         nowLogin={props.nowLogin}
         Logout={props.Logout}
+        getName={props.getName}
       />
       <CreatePost />
     </div>

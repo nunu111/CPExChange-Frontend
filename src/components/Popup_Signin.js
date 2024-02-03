@@ -24,14 +24,21 @@ const Signin = (props) => {
   const SigninAPI = async() => {
     const serverIP = "http://192.168.116.101:8080";
     const sending = {
-      username,
-      displayname,
+      userName : username,
+      displayName : displayname,
       password
     };
 
-      const resp = await axios.post(serverIP+"/guests/signin/", sending).then((res) => {
+      const resp = await axios.post(serverIP+"/guests/signin", sending).then((res) => {
         console.log("res", res.data);
-        props.LoginState();
+        if(res.data.status === 200){
+          props.LoginState(res.data.displayName);
+          alert("Signup successful!");
+          
+        }else{
+          alert("Signup unsuccessful!");
+        }
+        
       }).catch((err) => {
         console.error("Error:", err);
       });

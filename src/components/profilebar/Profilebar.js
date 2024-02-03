@@ -60,7 +60,7 @@ const LogoutAPI = async () => {
           {props.isLogin() ? (
             <div className="userprofile">
               <img src={unknowIcon} className="profile" alt="profile" />
-              <p className="text">Username99</p>
+              <p className="text">{props.getName()}</p>
               <span className="icon">
                 <img src={notiIcon} alt="noti" />
               </span>

@@ -9,6 +9,7 @@ function MyPostPage(props) {
         isLogin={props.isLogin}
         nowLogin={props.nowLogin}
         Logout={props.Logout}
+        getName={props.getName}
       />
     </div>
   );

@@ -13,17 +13,25 @@ const Login = (props) => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const { isPopupVisible, togglePopupVisibility } = props;
-  const serverIP = "http://192.168.116.101:8080//guests/login";
+  const serverIP = "http://192.168.116.101:8080/guests/login";
   const LoginAPI = async()=>  {
     const sending = {
-      username,
-      password
+      userName : username,
+      password 
     };
     console.log(JSON.stringify(sending));
       const resp = await axios.post(serverIP, sending).then((res) => {
         console.log("res", res.data);
+        if(res.data.status === 200){
+          props.LoginState(res.data.displayName);
+          alert("Login successful!");
+        }else{
+          alert("Login unsuccessful!");
+        }
       }).catch((err) => {
         console.error("Error:", err);
+        
+        
       });
   }
 
@@ -50,9 +58,9 @@ const Login = (props) => {
 
     // Assuming login is successful, you can close the popup
     
-    props.LoginState();
+    
     LoginAPI();
-    console.log("Login successful!");
+    
     togglePopupVisibility();
   };
 
