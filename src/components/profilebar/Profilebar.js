@@ -6,7 +6,7 @@ import homeIcon from "../Icon/home.svg";
 import explorIcon from "../Icon/explor.svg";
 import LoginButton from "../LoginButton";
 import SigninButton from "../SigninButton";
-import { Link } from "react-router-dom";
+import { Link ,useLocation,useNavigate } from "react-router-dom";
 import mybookmarkIcon from "../Icon/mybookmark.svg";
 import mypostIcon from "../Icon/mypost.svg";
 import unknowIcon from "../Icon/unknow.svg";
@@ -21,7 +21,8 @@ import axios from "axios";
 const ProfileBar = (props) => {
   const [logoutPopupVisible, setLogoutPopupVisible] = useState(false);
   const [editPopupVisible, setEditPopupVisible] = useState(false);
-
+  const location = useLocation();
+  const navigate = useNavigate();
 const LogoutAPI = async () => {
   const serverIP = "http://192.168.116.101:8080";
   const cookie = localStorage.getItem("cookie");
@@ -40,7 +41,7 @@ const LogoutAPI = async () => {
   function logout() {
     // You can perform any additional logout logic here
     props.Logout();
-
+    if(location.pathname === "/Create-Post") navigate("/")
     // Close the popup after logout
     setLogoutPopupVisible(false);
   }

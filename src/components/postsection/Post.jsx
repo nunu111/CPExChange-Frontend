@@ -24,6 +24,17 @@ export default function Post(props) {
   });
 
   const [isLiked, setIsLiked] = useState(false);
+  const [commentsection, setCommentsection] = useState([
+    {
+      CommentID: "",
+      displayName: "",
+      LikeAmount: 0,
+      hasVerify: false,
+      reply: [],
+      CreateDate: "",
+      detail: "",
+    },
+  ]);
 
   const getPostAPI = async () => {
     const serverIP = getIP();
@@ -43,6 +54,13 @@ export default function Post(props) {
     //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     //   tag: ["ไก่ย่าง", "เล่นเกมที่บ้าน"],
     // });
+  };
+
+  const getCommentAPI = async () => {
+    const serverIP = getIP();
+    await axios.get(serverIP + "/posts/comment?postId=" + PID).then((res) => {
+      setCommentsection(res.data);
+    });
   };
 
   const LikeAPI = async () => {
