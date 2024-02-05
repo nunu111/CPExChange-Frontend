@@ -10,6 +10,7 @@ import Postfunc from "../function/Postfunc";
 import axios from "axios";
 import likedIcon from "../Icon/liked.svg";
 import { IPconfig } from "../function/IPconfig";
+import CommentButton from "./CommentButton";
 export default function Post(props) {
   const { PostListAPI, PostAPI, getPostdetail, UpdatePost } = Postfunc();
   const params = useParams();
@@ -144,6 +145,7 @@ export default function Post(props) {
         <div className="commmentsection">
           <p className="ctitle">Comment section</p>
           <hr className="chr" />
+          <CommentButton/>
           <Comment />
           <Comment />
           <Comment />

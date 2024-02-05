@@ -4,6 +4,7 @@ import commentIcon from "../Icon/comment.svg";
 import heartIcon from "../Icon/heart.svg";
 import verifyIcon from "../Icon/verify.svg";
 import unknowIcon from "../Icon/unknow.svg";
+import ReplyButton from "./ReplyButton";
 export default function Comment() {
   const [isVerify, setIsVerify] = useState(true);
 
@@ -56,6 +57,7 @@ export default function Comment() {
         </div>
       </div>
       <p>{commentsection.detail}</p>
+      <ReplyButton/>
     </div>
   );
 }
