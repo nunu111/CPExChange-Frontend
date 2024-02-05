@@ -34,7 +34,7 @@ export default function Comment(props) {
         </div>
       </div>
       <p>{props.detail}</p>
-      <ReplyButton />
+      {/* <ReplyButton /> */}
     </div>
   );
 }
