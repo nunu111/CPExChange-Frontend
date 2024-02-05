@@ -29,9 +29,6 @@ function CommentButton() {
 
   return (
     <div>
-      <button className="commentButton" onClick={handleCommentButtonClick}>
-        Comment
-      </button>
       {/* {isCommentFormVisible && ( */}
       <div>
         <Editor
@@ -40,6 +37,9 @@ function CommentButton() {
         />
       </div>
       {/* )} */}
+      <button className="commentButton" onClick={handleCommentButtonClick}>
+        Comment
+      </button>
     </div>
   );
 }
