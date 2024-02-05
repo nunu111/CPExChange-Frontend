@@ -137,7 +137,7 @@ const PostList = (props) => {
         return (
           <Postbox
             title={Post.Topic}
-            taglist={Post.taglist}
+            taglist={taglist}
             detail={Post.Detail}
             date={Post.TimeStamp}
             isVerify={Post.hasVerify}
@@ -190,7 +190,7 @@ const PostList = (props) => {
         PID={4}
       /> */}
 
-      {isFetching && <p>Loading more data...</p>}
+      {isFetching && <div className="loader"></div>}
       {/* <Postbox/>
         <Postbox/>
         <Postbox/>

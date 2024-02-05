@@ -26,16 +26,39 @@ export default function Post(props) {
   const [isLiked, setIsLiked] = useState(false);
   const [commentsection, setCommentsection] = useState([
     {
-      CommentID: "",
-      displayName: "",
+      CommentID: "1112",
+      displayName: "ไก่ย่าง",
       LikeAmount: 0,
       hasVerify: false,
       reply: [],
-      CreateDate: "",
-      detail: "",
+      CreateDate: "1150",
+      detail: "ำเำพ้สวาำพิสพำมงงิ",
+    },
+    {
+      CommentID: "1112",
+      displayName: "Fifa online",
+      LikeAmount: 50,
+      hasVerify: true,
+      reply: [],
+      CreateDate: "วันนี้",
+      detail: "พูดอย่างงี้อยากโดนเหรอครับ",
     },
   ]);
 
+  const serVerifyTopic = () => {
+    const sortedComments = [...commentsection].sort((a, b) => {
+      // Sort in descending order based on hasVerify
+      if (a.hasVerify && !b.hasVerify) {
+        return -1; // a comes first
+      } else if (!a.hasVerify && b.hasVerify) {
+        return 1; // b comes first
+      } else {
+        return 0; // no change in order
+      }
+    });
+
+    setCommentsection(sortedComments);
+  };
   const getPostAPI = async () => {
     const serverIP = getIP();
     const resp = await axios
@@ -84,7 +107,9 @@ export default function Post(props) {
   };
 
   useEffect(() => {
-    getPostAPI();
+    // getPostAPI();
+    // getCommentAPI();
+    serVerifyTopic();
     // setPostsection({
     //   ...postsection,
     //   topic: "title",
@@ -144,9 +169,21 @@ export default function Post(props) {
         <div className="commmentsection">
           <p className="ctitle">Comment section</p>
           <hr className="chr" />
-          <Comment />
-          <Comment />
-          <Comment />
+          {commentsection.map((com, i) => {
+            const reply = Array.isArray(com.reply) ? com.reply : [];
+            return (
+              <Comment
+                CommentID={com.CommentID}
+                displayName={com.displayName}
+                LikeAmount={com.LikeAmount}
+                hasVerify={com.hasVerify}
+                reply={reply}
+                CreateDate={com.CreateDate}
+                detail={com.detail}
+                key={i}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

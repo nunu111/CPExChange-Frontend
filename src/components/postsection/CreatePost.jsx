@@ -10,6 +10,7 @@ export default function CreatePost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [topic, setTopic] = useState("");
+  const [tag, setTag] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
   const { getIP } = IPconfig();
   const createPostAPI = async () => {
@@ -17,7 +18,10 @@ export default function CreatePost(props) {
 
     const resp = await axios
       .post(serverIP + "/posts/create", {
-        data,
+        topic,
+        tag,
+        detail: data,
+        cookie: "",
       })
       .then((res) => {
         console.log(res.data);
