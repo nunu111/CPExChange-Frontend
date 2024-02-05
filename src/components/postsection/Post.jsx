@@ -17,41 +17,22 @@ export default function Post(props) {
   const PID = params.PID;
   const { getIP } = IPconfig();
   const [postsection, setPostsection] = useState({
-    Topic: "",
-    Detail: "",
-    TimeStamp: "",
-    tag: [],
-    LikeCout: 0,
+    topic: "",
+    detail: "",
+    create_at: "",
+    taglist: [],
+    like_count: 0,
   });
 
   const [isLiked, setIsLiked] = useState(false);
-  const [commentsection, setCommentsection] = useState([
-    {
-      CommentID: "1112",
-      displayName: "ไก่ย่าง",
-      LikeAmount: 0,
-      hasVerify: false,
-      reply: [],
-      CreateDate: "1150",
-      detail: "ำเำพ้สวาำพิสพำมงงิ",
-    },
-    {
-      CommentID: "1112",
-      displayName: "Fifa online",
-      LikeAmount: 50,
-      hasVerify: true,
-      reply: [],
-      CreateDate: "วันนี้",
-      detail: "พูดอย่างงี้อยากโดนเหรอครับ",
-    },
-  ]);
+  const [commentsection, setCommentsection] = useState([]);
 
   const serVerifyTopic = () => {
     const sortedComments = [...commentsection].sort((a, b) => {
       // Sort in descending order based on hasVerify
-      if (a.hasVerify && !b.hasVerify) {
+      if (a.is_verify && !b.is_verify) {
         return -1; // a comes first
-      } else if (!a.hasVerify && b.hasVerify) {
+      } else if (!a.is_verify && b.is_verify) {
         return 1; // b comes first
       } else {
         return 0; // no change in order
@@ -68,23 +49,22 @@ export default function Post(props) {
         console.log("resPost : ", res.data);
         setPostsection(res.data);
       })
-      .catch((err) => {});
-
-    // setPostsection({
-    //   ...postsection,
-    //   topic: "title",
-    //   date: "โพสต์เมื่อ 9 : 40 | 15 Dec 22 by Username77",
-    //   detail:
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    //   tag: ["ไก่ย่าง", "เล่นเกมที่บ้าน"],
-    // });
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getCommentAPI = async () => {
     const serverIP = getIP();
-    await axios.get(serverIP + "/posts/comment?postId=" + PID).then((res) => {
-      setCommentsection(res.data);
-    });
+    await axios
+      .get(serverIP + "/comments?commentId=" + PID)
+      .then((res) => {
+        console.log("resComment : ", res.data);
+        setCommentsection(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const LikeAPI = async () => {
@@ -108,9 +88,11 @@ export default function Post(props) {
   };
 
   useEffect(() => {
-    // getPostAPI();
-    // getCommentAPI();
-    serVerifyTopic();
+    getPostAPI();
+    getCommentAPI();
+    setCommentsection(commentsection.sort(customSort));
+
+    // serVerifyTopic();
     // setPostsection({
     //   ...postsection,
     //   topic: "title",
@@ -122,6 +104,16 @@ export default function Post(props) {
     // });
   }, []);
 
+  // Custom sorting function
+  const customSort = (a, b) => {
+    const targetProfileName = props.getName();
+    if (a.profile_name === targetProfileName) return -1;
+    if (b.profile_name === targetProfileName) return 1;
+    return a.profile_name.localeCompare(b.profile_name);
+  };
+
+  // Sort the array using the custom sorting function
+
   return (
     <div className="Mainbox">
       <Link to="/" className="goback">
@@ -129,7 +121,7 @@ export default function Post(props) {
       </Link>
 
       <div className="Postbox">
-        <div className="Title">{postsection.Topic}</div>
+        <div className="Title">{postsection.topic}</div>
         <div className="top">
           {isLiked ? (
             <img
@@ -138,7 +130,7 @@ export default function Post(props) {
               className="like"
               onClick={() => {
                 setIsLiked(!isLiked);
-                postsection.LikeCout = postsection.LikeCout - 1;
+                postsection.like_count = Number(postsection.like_count) - 1;
                 setPostsection({ ...postsection });
               }}
             />
@@ -149,39 +141,46 @@ export default function Post(props) {
               className="like"
               onClick={() => {
                 setIsLiked(!isLiked);
-                postsection.LikeCout = postsection.LikeCout + 1;
+                postsection.like_count = Number(postsection.like_count) + 1;
                 setPostsection({ ...postsection });
               }}
             />
           )}
-          <span className="text">{postsection.LikeCout}</span>
+          <span className="text">{postsection.like_count}</span>
           <img src={pinIcon} alt="pin" className="bookmark" />
         </div>
         <p className="date">
-          โพสต์เมื่อ {postsection.TimeStamp} {postsection.postowner}
+          โพสต์เมื่อ {postsection.create_at} {postsection.postowner}
         </p>
         <hr />
         {/* {postsection.tag.map((Tag, i) => {
           return <PostTag TagName={Tag} key={i} />;
         })} */}
         <br />
-        <div className="detail">{postsection.Detail}</div>
+        <div className="detail">{postsection.detail}</div>
 
         <div className="commmentsection">
           <p className="ctitle">Comment section</p>
           <hr className="chr" />
-          <CommentButton />
+          {props.isLogin() && (
+            <CommentButton
+              PID={params.PID}
+              setComment={getCommentAPI}
+              getName={props.getName}
+            />
+          )}
           {commentsection.map((com, i) => {
             const reply = Array.isArray(com.reply) ? com.reply : [];
             return (
               <Comment
-                CommentID={com.CommentID}
-                displayName={com.displayName}
-                LikeAmount={com.LikeAmount}
-                hasVerify={com.hasVerify}
+                CommentID={com.comment_id}
+                displayName={com.profile_name}
+                LikeAmount={com.like_count}
+                hasVerify={com.is_verify}
                 reply={reply}
-                CreateDate={com.CreateDate}
+                CreateDate={com.create_at}
                 detail={com.detail}
+                isLogin={props.isLogin}
                 key={i}
               />
             );

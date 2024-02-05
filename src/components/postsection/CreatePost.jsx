@@ -16,10 +16,10 @@ export default function CreatePost(props) {
   const createPostAPI = async () => {
     const serverIP = getIP();
 
-    const resp = await axios
+    await axios
       .post(serverIP + "/posts/create", {
         topic,
-        tag,
+        tag: JSON.stringify(tag),
         detail: data,
         cookie: "",
       })
@@ -27,8 +27,9 @@ export default function CreatePost(props) {
         console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error", err);
       });
+    console.log(data);
   };
 
   useEffect(() => {
@@ -37,9 +38,9 @@ export default function CreatePost(props) {
 
   const DataPost = () => {
     createPostAPI();
-    console.log(topic);
-    console.log(data);
-    console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
+    // console.log(topic);
+    // console.log(data);
+    // console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
   };
 
   // const TopicPost = () => {

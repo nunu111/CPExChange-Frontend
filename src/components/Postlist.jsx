@@ -7,32 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { IPconfig } from "./function/IPconfig";
 const PostList = (props) => {
-  const [PostList, setPostList] = useState([
-    {
-      Topic: "Post test",
-      taglist: ["เนื้อหา 1", "เนื้อหา 2"],
-      Detail:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      TimeStamp: "when",
-      profileName: "Username77",
-      hasVerify: false,
-      Comment: 10,
-      LikeCount: 10,
-      postID: 1,
-    },
-    {
-      Topic: "PPAP",
-      taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
-      Detail:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      TimeStamp: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
-      profileName: "Username77",
-      hasVerify: true,
-      Comment: 25,
-      LikeCount: 1000,
-      postID: 2,
-    },
-  ]);
+  const [PostList, setPostList] = useState([]);
 
   const [isFetching, setIsFetching] = useState(false);
   const [page, setPage] = useState(1);
@@ -46,37 +21,19 @@ const PostList = (props) => {
   const serverIP = getIP();
 
   const getPageAPI = async () => {
-    // const resp = await axios
-    //   .get(serverIP + "/pages?page=" + page)
-    //   .then((res) => {
-    //     console.log("res", res.data);
+    console.log("Check Postlist1", PostList);
+    await axios
+      .get(serverIP + "/pages?page=" + page)
+      .then((res) => {
+        console.log("res", res.data);
+        setPostList(PostList.concat(res.data));
 
-    //     const test = res.data[0];
-    //     test.taglist = [];
+        console.log("Check Postlist2", PostList);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
 
-    //     const testz = res.data[1];
-    //     testz.taglist = [];
-    //     setPostList([...PostList, test, testz]);
-    //   })
-    //   .catch((err) => {
-    //     console.error("Error:", err);
-    //   });
-
-    setPostList([
-      ...PostList,
-      {
-        Topic: "PPAP",
-        taglist: ["ไก่ย่าง", "เเล่นเกมที่บ้าน"],
-        Detail:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        TimeStamp: "โพสต์เมื่อ 9 : 40 | 15 Dec 22",
-        profileName: "Username77",
-        hasVerify: true,
-        Comment: 25,
-        LikeCount: 1000,
-        postID: 2,
-      },
-    ]);
     // window.scrollTo({
     //   top: document.documentElement.scrollTop - 80, // Adjust the value as needed
     //   behavior: "smooth", // Use 'auto' for instant scroll or 'smooth' for smooth scroll
@@ -94,7 +51,7 @@ const PostList = (props) => {
       // Check if the user has reached the bottom of the page
       if (distanceFromBottom < threshold && !isFetching) {
         setIsFetching(true);
-        console.log(1);
+        console.log(page);
         setPage(page + 1);
         getPageAPI();
         // Simulate fetching more data (replace with your actual fetching logic)
@@ -136,15 +93,15 @@ const PostList = (props) => {
         const taglist = Array.isArray(Post.taglist) ? Post.taglist : [];
         return (
           <Postbox
-            title={Post.Topic}
+            title={Post.topic}
             taglist={taglist}
-            detail={Post.Detail}
-            date={Post.TimeStamp}
-            isVerify={Post.hasVerify}
-            comment={Post.Comment}
-            like={Post.LikeCount}
+            detail={Post.detail}
+            date={Post.create_at}
+            isVerify={Post.has_verify}
+            comment={Post.commentCount}
+            like={Post.like_count}
             bywho={Post.profileName}
-            PID={Post.postID}
+            PID={Post.id}
             key={i}
           />
         );

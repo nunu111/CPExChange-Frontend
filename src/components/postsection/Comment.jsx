@@ -36,7 +36,7 @@ export default function Comment(props) {
         </div>
       </div>
       <p>{props.detail}</p>
-      {/* <ReplyButton /> */}
+      {props.isLogin() && <ReplyButton />}
     </div>
   );
 }

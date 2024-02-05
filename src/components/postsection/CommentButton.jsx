@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
-
-function CommentButton() {
+import { IPconfig } from "../function/IPconfig";
+import axios from "axios";
+function CommentButton(props) {
   const [isCommentFormVisible, setCommentFormVisible] = useState(false);
 
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
+  const { getIP } = IPconfig();
+
+  const CreateCommnetAPI = async () => {
+    const serverIP = getIP();
+    await axios.post(serverIP + "/comments/create", {
+      PostID: props.PID,
+      detail: data,
+      cookie: "cookie",
+    });
+    props.setComment();
+  };
 
   useEffect(() => {
     setEditorLoaded(true);
@@ -13,6 +25,7 @@ function CommentButton() {
 
   const handleCommentButtonClick = () => {
     setCommentFormVisible(!isCommentFormVisible);
+    CreateCommnetAPI();
     setData(""); // Clear the text field when the button is clicked
     DataPost(); // Call DataPost function when the button is clicked
   };
