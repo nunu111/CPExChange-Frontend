@@ -157,7 +157,11 @@ export default function Post(props) {
           return <PostTag TagName={Tag} key={i} />;
         })} */}
         <br />
-        <div className="detail">{postsection.detail}</div>
+        <div
+          className="detail"
+          dangerouslySetInnerHTML={{ __html: postsection.detail }}
+          _
+        />
 
         <div className="commmentsection">
           <p className="ctitle">Comment section</p>

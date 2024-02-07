@@ -14,7 +14,6 @@ const PostList = (props) => {
   const { getIP } = IPconfig();
   useEffect(() => {
     getPageAPI();
-
     console.log(PostList);
   }, []);
 
@@ -101,7 +100,7 @@ const PostList = (props) => {
             comment={Post.commentCount}
             like={Post.like_count}
             bywho={Post.profileName}
-            PID={Post.id}
+            PID={Post.post_id}
             key={i}
           />
         );

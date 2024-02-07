@@ -27,14 +27,16 @@ const Login = (props) => {
       .post(serverIP + "/guests/login", sending)
       .then((res) => {
         console.log("res", res.data);
-        if (res.status === 200) {
+        if (res.status === 200) 
           props.LoginState(res.data.profileName);
-          // alert("Login successful!");
-        } else {
-          // alert("Login unsuccessful!");
-        }
+          setUsername("");
+          setPassword("");
+          togglePopupVisibility();
       })
       .catch((err) => {
+        if(err.response.status === 400){
+          setPasswordError("Username or password is incorrect.");
+        }
         console.error("Error:", err);
       });
   };
@@ -56,7 +58,7 @@ const Login = (props) => {
     }
 
     if (password.length < 7) {
-      setPasswordError("The password must be 8 characters or longer");
+      setPasswordError("Username or password is incorrect.");
       return;
     }
 
@@ -64,7 +66,7 @@ const Login = (props) => {
 
     LoginAPI();
     // props.LoginState("F");
-    togglePopupVisibility();
+    
   };
 
   const handleKeyPress = (event) => {

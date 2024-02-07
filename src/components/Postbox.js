@@ -34,7 +34,7 @@ const Postbox =(props) => {
       
       <span className='CLV'>
       {
-          props.isVerify?<span className='text'><img src={verifyIcon} alt='verify' className='verify'/>Answer Vilified</span> :<></>
+          props.isVerify=== "1"?<span className='text'><img src={verifyIcon} alt='verify' className='verify'/>Answer Vilified</span> :<></>
         }
         <img src={commentIcon} alt='comment' className='comment'/>
         <span className='text'>{props.comment}</span>
