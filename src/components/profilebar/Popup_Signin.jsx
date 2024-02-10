@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
 import "../../pages/Mainpage.css";
@@ -18,30 +17,29 @@ const Signin = (props) => {
   const { isPopupVisible, togglePopupVisibility } = props;
   const [isSignin, setIsSignin] = useState(false);
   const { getIP } = IPconfig();
-  const SigninAPI = async() => {
-    
+  const SigninAPI = async () => {
     const serverIP = getIP();
     const sending = {
-      username : username,
-      profileName : displayname,
-      password
+      username: username,
+      profileName: displayname,
+      password,
     };
 
-      const resp = await axios.post(serverIP+"/guests/signup", sending).then((res) => {
+    const resp = await axios
+      .post(serverIP + "/guests/signup", sending)
+      .then((res) => {
         console.log("res", res.data);
-        if(res.status === 201){
+        if (res.status === 201) {
           props.LoginState(displayname);
           // alert("Signup successful!");
-    togglePopupVisibility();
-          
-        }else{
+          togglePopupVisibility();
+        } else {
           // alert("Signup unsuccessful!");
         }
-        
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error("Error:", err);
       });
-
   };
 
   const onButtonClick1 = () => {

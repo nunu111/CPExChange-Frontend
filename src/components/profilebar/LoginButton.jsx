@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ProfileButton from "./ProfileButton";
 import loginIcon from "../Icon/login.svg";
-import Popup_Login from "./Popup_Login";
+import PopupLogin from "./Popup_Login";
+import ProfileButton from "./ProfileButton";
 
 const LoginButton = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
@@ -12,7 +12,6 @@ const LoginButton = (props) => {
 
   const onClick = () => {
     togglePopupVisibility();
-    
   };
 
   return (
@@ -20,7 +19,7 @@ const LoginButton = (props) => {
       <div onClick={onClick} role="button">
         <ProfileButton Detail="ลงชื่อเข้าใช้" Img={loginIcon} />
       </div>
-      <Popup_Login
+      <PopupLogin
         isPopupVisible={isPopupVisible}
         togglePopupVisibility={togglePopupVisibility}
         LoginState={props.LoginState}
