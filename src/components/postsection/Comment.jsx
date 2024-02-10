@@ -5,8 +5,6 @@ import heartIcon from "../Icon/heart.svg";
 import verifyIcon from "../Icon/verify.svg";
 import unknowIcon from "../Icon/unknow.svg";
 import ReplyButton from "./ReplyButton";
-import ReplyButton1 from "./ReplyButton1";
-import Reply2 from "./Reply2";
 
 export default function Comment(props) {
   const [isVerify, setIsVerify] = useState(true);

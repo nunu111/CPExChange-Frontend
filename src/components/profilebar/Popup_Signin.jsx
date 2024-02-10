@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
-import "../pages/Mainpage.css";
+import "../../pages/Mainpage.css";
 import ReactDOM from "react-dom";
-import XIcon from "./Icon/X.svg";
-import { SigninFunc } from "./function/Signinfunc";
+import XIcon from "../Icon/X.svg";
 import axios from "axios";
-import { IPconfig } from "./function/IPconfig";
+import { IPconfig } from "../function/IPconfig";
 const Signin = (props) => {
-  const { SigninState1 } = SigninFunc();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -79,7 +77,6 @@ const Signin = (props) => {
     }
 
     // Assuming login is successful, you can close the popup
-    setIsSignin(SigninState1(username, password, displayname));
     SigninAPI();
   };
 

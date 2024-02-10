@@ -32,35 +32,7 @@
   overflow-wrap: break-word;
   font-size: 30px;
 }
-.top {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.top .bookmark {
-  position: relative;
-  top: 5px;
-  margin-left: 10px;
-  height: 38px;
-  cursor: pointer;
-}
-.top .like {
-  height: 25px;
-  cursor: pointer;
-  transition: 0.2s
-  
-}
-.top .like:hover {
-  transform: scale(1.2);
-}
-.top .like:active {
-  transform: scale(1);
-}
-.top .text {
-  font-size: 35px;
-  margin-left: 10px;
-  color: #afafaf;
-}
+
 
 .tag {
   display: inline;
@@ -89,9 +61,7 @@
   );
   pointer-events: none;
 }
-.date {
-  color: #bebebe;
-}
+
 .CLV {
   position: absolute;
   right: 30px;

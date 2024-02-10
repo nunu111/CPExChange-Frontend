@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Postlist.css";
 import Postbox from "./Postbox";
-import editIcon from "./Icon/editbig.svg";
-import CreatePost from "./postsection/CreatePost";
+import editIcon from "../Icon/editbig.svg";
+import CreatePost from "../postsection/CreatePost";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { IPconfig } from "./function/IPconfig";
+import { IPconfig } from "../function/IPconfig";
 const PostList = (props) => {
   const [PostList, setPostList] = useState([]);
 
@@ -105,58 +105,8 @@ const PostList = (props) => {
           />
         );
       })}
-      {/* <Postbox
-        title={"อยากกินไก่จังนะครับ"}
-        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
-        detail={
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }
-        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
-        isVerify={true}
-        comment={1255}
-        like={10}
-        bywho={"Username77"}
-        PID={2}
-      />
-
-      <Postbox
-        title={"อยากกินไก่จังนะครับ"}
-        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
-        detail={
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }
-        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
-        isVerify={true}
-        comment={1255}
-        like={10}
-        bywho={"Username77"}
-        PID={3}
-      />
-      <Postbox
-        title={"อยากกินไก่จังนะครับ"}
-        taglist={["ไก่ย่าง", "เเล่นเกมที่บ้าน"]}
-        detail={
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }
-        date={"โพสต์เมื่อ 9 : 40 | 15 Dec 22"}
-        isVerify={false}
-        comment={1255}
-        like={10}
-        bywho={"Username77"}
-        PID={4}
-      /> */}
 
       {isFetching && <div className="loader"></div>}
-      {/* <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/>
-        <Postbox/> */}
     </div>
   );
 };

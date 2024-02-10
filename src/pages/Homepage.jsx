@@ -1,4 +1,4 @@
-import PostList from "../components/Postlist";
+import PostList from "../components/postlistsection/Postlist";
 import ProfileBar from "../components/profilebar/Profilebar";
 import "./Mainpage.css";
 

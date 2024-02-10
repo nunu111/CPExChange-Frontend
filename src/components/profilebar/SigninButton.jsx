@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import ProfileButton from "../profilebar/ProfileButton";
-import ReplyButton1 from "./ReplyButton1";
+import ProfileButton from "./ProfileButton";
+import registerIcon from "../Icon/register.svg";
+import Popup_Signin from "./Popup_Signin";
 
-const Reply2 = (props) => {
+const SigninButton = (props) => {
   const [isPopupVisible, setPopupVisibility] = useState(false);
 
   const togglePopupVisibility = () => {
-    setPopupVisibility(!isPopupVisible);
+    setPopupVisibility((prevIsPopupVisible) => !prevIsPopupVisible);
   };
 
   const onClick = () => {
     togglePopupVisibility();
+    
   };
 
   return (
     <div>
       <div onClick={onClick} role="button">
-        <ProfileButton Detail="Reply" />
+        <ProfileButton Detail="สมัครบัญชี" Img={registerIcon} />
       </div>
-      <ReplyButton1
+      <Popup_Signin
         isPopupVisible={isPopupVisible}
         togglePopupVisibility={togglePopupVisibility}
         LoginState={props.LoginState}
@@ -27,4 +29,4 @@ const Reply2 = (props) => {
   );
 };
 
-export default Reply2;
+export default SigninButton;

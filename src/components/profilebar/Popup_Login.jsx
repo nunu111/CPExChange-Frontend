@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./popup.css";
 import "./index.css";
-import "../pages/Mainpage.css";
+import "../../pages/Mainpage.css";
 import ReactDOM from "react-dom";
-import logo from "./Icon/logo.svg";
-import XIcon from "./Icon/X.svg";
+import logo from "../Icon/logo.svg";
+import XIcon from "../Icon/X.svg";
 import axios from "axios";
-import { IPconfig } from "./function/IPconfig";
+import { IPconfig } from "../function/IPconfig";
 const Login = (props) => {
   const { getIP } = IPconfig();
   const [username, setUsername] = useState("");

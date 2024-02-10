@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "../Postlist.css";
-import pinIcon from "../Icon/pin.svg";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { IPconfig } from "../function/IPconfig";
+
+import pinIcon from "../Icon/pin.svg";
 import heartIcon from "../Icon/heart.svg";
+import likedIcon from "../Icon/liked.svg";
+
 import PostTag from "../posttag";
 import Comment from "./Comment";
-import "./Comment.css";
-import Postfunc from "../function/Postfunc";
-import axios from "axios";
-import likedIcon from "../Icon/liked.svg";
-import { IPconfig } from "../function/IPconfig";
 import CommentButton from "./CommentButton";
+
+import "./Post.css";
+import "./Comment.css";
+
 export default function Post(props) {
-  const { PostListAPI, PostAPI, getPostdetail, UpdatePost } = Postfunc();
   const params = useParams();
   const PID = params.PID;
   const { getIP } = IPconfig();
@@ -115,12 +117,12 @@ export default function Post(props) {
   // Sort the array using the custom sorting function
 
   return (
-    <div className="Mainbox">
-      <Link to="/" className="goback">
+    <div className="MainboxPost">
+      <Link to="/" className="gobackPost">
         {"< ย้อนกลับ"}
       </Link>
 
-      <div className="Postbox">
+      <div className="EachPostbox">
         <div className="Title">{postsection.topic}</div>
         <div className="top">
           {isLiked ? (
@@ -160,7 +162,6 @@ export default function Post(props) {
         <div
           className="detail"
           dangerouslySetInnerHTML={{ __html: postsection.detail }}
-          _
         />
 
         <div className="commmentsection">

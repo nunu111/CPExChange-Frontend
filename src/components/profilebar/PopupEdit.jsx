@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import unknowIcon from "../Icon/unknow.svg";
 import XIcon from "../Icon/X.svg";
-import { SigninFunc } from "../function/Signinfunc";
 
 const PopupEdit = ({ visible, onClose, onEdit }) => {
   const [newdisplayname, setNewdisplayname] = useState("");
