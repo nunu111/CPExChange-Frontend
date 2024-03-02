@@ -27,14 +27,13 @@ const Login = (props) => {
       .post(serverIP + "/guests/login", sending)
       .then((res) => {
         console.log("res", res.data);
-        if (res.status === 200) 
-          props.LoginState(res.data.profileName);
-          setUsername("");
-          setPassword("");
-          togglePopupVisibility();
+        if (res.status === 200) props.LoginState(res.data.profileName);
+        setUsername("");
+        setPassword("");
+        togglePopupVisibility();
       })
       .catch((err) => {
-        if(err.response.status === 400){
+        if (err.response.status === 400) {
           setPasswordError("Username or password is incorrect.");
         }
         console.error("Error:", err);
@@ -65,8 +64,7 @@ const Login = (props) => {
     // Assuming login is successful, you can close the popup
 
     LoginAPI();
-    // props.LoginState("F");
-    
+    props.LoginState("F");
   };
 
   const handleKeyPress = (event) => {

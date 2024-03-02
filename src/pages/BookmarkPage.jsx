@@ -1,3 +1,4 @@
+import Bookmark from "../components/postsection/Bookmark";
 import ProfileBar from "../components/profilebar/Profilebar";
 import "./Mainpage.css";
 
@@ -10,6 +11,7 @@ function BookmarkPage(props) {
         Logout={props.Logout}
         getName={props.getName}
       />
+      <Bookmark />
     </div>
   );
 }
