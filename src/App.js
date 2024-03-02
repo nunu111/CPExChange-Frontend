@@ -6,8 +6,47 @@ import { Login } from "./components/function/Login";
 import CreatePostpage from "./pages/CreatePostpage";
 import MyPostPage from "./pages/MyPostPage";
 import BookmarkPage from "./pages/BookmarkPage";
+import { useEffect } from "react";
+import axios from "axios";
+import { IPconfig } from "./components/function/IPconfig";
 function App() {
   const { nowLogin, isLogin, logout ,getName } = Login();
+  const { getIP } = IPconfig();
+  // * Check if token exists in localStorage
+  useEffect(() => {
+    // Check if localStorage is available
+    if (typeof localStorage === 'undefined') {
+      console.error('localStorage is not supported in this browser');
+      return;
+    }
+    // Check if a specific item exists in localStorage
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Perform your action if the item doesn't exist
+      console.log('Your item does not exist in localStorage. Performing some action...');
+      // For example, you can set a default value or initialize the item
+      localStorage.setItem('token', '');
+    }else{
+      CheckAuthAPI(token);
+      console.log('Your item exists in localStorage. Performing some action...');
+    }
+    // The dependency array is empty to run this effect only once when the component mounts
+  }, []);
+
+  const CheckAuthAPI = async (token) => {
+
+    const serverIP = getIP();
+    await axios
+      .get(serverIP + "/guests/isAuth",
+      {headers: { Authorization: `Bearer ${token}` }})
+      .then((res) => {
+        nowLogin(res.data);
+      })
+      .catch((err) => {
+        console.log("Error Auth:", err);
+      });
+      console.log("pass");
+  }
 
   return (
     <BrowserRouter>
