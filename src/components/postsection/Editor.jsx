@@ -13,7 +13,7 @@ function Editor({ onChange, editorLoaded, name, value }) {
 
   return (
     <div>
-      {/* <Latex>{"$V_c = V_s(1 - 10^{-\\frac{t}{T}})$"}</Latex> */}
+      <Latex>{"$V_c = V_s(1 - 10^{-\\frac{t}{T}})$"}</Latex>
       {editorLoaded ? (
         <CKEditor
           type="wefefw"

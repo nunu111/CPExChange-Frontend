@@ -26,8 +26,8 @@ const Login = (props) => {
     const resp = await axios
       .post(serverIP + "/guests/login", sending)
       .then((res) => {
-        console.log("res", res.data);
         if (res.status === 200) props.LoginState(res.data.profileName);
+        localStorage.setItem("token", res.data.token);
         setUsername("");
         setPassword("");
         togglePopupVisibility();
@@ -64,7 +64,7 @@ const Login = (props) => {
     // Assuming login is successful, you can close the popup
 
     LoginAPI();
-    props.LoginState("F");
+    // props.LoginState("F");
   };
 
   const handleKeyPress = (event) => {

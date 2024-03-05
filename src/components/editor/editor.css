@@ -1,0 +1,41 @@
+.editor .icon{
+    background-color: white;
+    padding: 9px;
+    width: 35px;
+    height: 35px;
+    border-radius: 2px;
+    margin: 2px;
+
+    user-select: none;
+}
+
+.editor{
+    background-color: white;
+  
+}
+.editor .icon:hover{
+    background-color: #d9d9d9;
+}
+.editor .icon:active{
+    
+    background-color: lightblue;
+    transition: 0.3s ease-in-out;
+    
+    
+}
+.main_editor{
+    background-color: white;
+}
+.wrapper-class {
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+.editor-class {
+    background-color:lightgray;
+    cursor: text;
+    padding: 1rem;
+    border: 1px solid #000000;
+}
+.toolbar-class {
+    border: 1px solid #ccc;
+}

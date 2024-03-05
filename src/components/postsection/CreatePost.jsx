@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Editor from "./Editor";
 import PopupExitPost from "./PopupExitPost";
+import MakeEditor from "../editor/MakeEditor";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 export default function CreatePost(props) {
@@ -15,12 +16,12 @@ export default function CreatePost(props) {
   const { getIP } = IPconfig();
   const createPostAPI = async () => {
     const serverIP = getIP();
-
+    console.log("data",data);
     await axios
       .post(serverIP + "/posts/create", {
         topic,
         tag: JSON.stringify(tag),
-        detail: data,
+        detail: JSON.stringify(data, null, 2).slice(1,-1),
         cookie: "",
       })
       .then((res) => {
@@ -37,9 +38,12 @@ export default function CreatePost(props) {
   }, []);
 
   const DataPost = () => {
+    setData(JSON.stringify(data, null, 2))
+    // console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.parse(JSON.stringify(data, null, 2)))
     createPostAPI();
-    // console.log(topic);
-    // console.log(data);
+
+    
     // console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
   };
 
@@ -89,13 +93,10 @@ export default function CreatePost(props) {
         />
       </div>
       <br />
-      <div className="Postbox">
-        <Editor
-          onChange={(editorData) => setData(editorData)}
-          editorLoaded={editorLoaded}
-        />
-      </div>
 
+      <div className="Postbox">
+        <MakeEditor SetEditorValue={setData} />
+      </div>
       <div
         className="CreatePostButton"
         style={{ textAlign: "right", marginTop: "20px", left: "1200px" }}

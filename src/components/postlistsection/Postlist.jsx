@@ -88,6 +88,7 @@ const PostList = (props) => {
         <span> / </span>
         <span className="Text"> โพสต์ล่าสุด</span>
       </div>
+      
       {PostList.map((Post, i) => {
         const taglist = Array.isArray(Post.taglist) ? Post.taglist : [];
         return (
@@ -100,7 +101,7 @@ const PostList = (props) => {
             comment={Post.commentCount}
             like={Post.like_count}
             bywho={Post.profileName}
-            PID={Post.post_id}
+            PID={Post.id}
             key={i}
           />
         );

@@ -9,6 +9,7 @@ import BookmarkPage from "./pages/BookmarkPage";
 import { useEffect } from "react";
 import axios from "axios";
 import { IPconfig } from "./components/function/IPconfig";
+import { render } from "react-dom";
 function App() {
   const { nowLogin, isLogin, logout ,getName } = Login();
   const { getIP } = IPconfig();
@@ -37,7 +38,7 @@ function App() {
 
     const serverIP = getIP();
     await axios
-      .get(serverIP + "/guests/isAuth",
+      .get(serverIP + "v1/guests/isAuth",
       {headers: { Authorization: `Bearer ${token}` }})
       .then((res) => {
         nowLogin(res.data);
