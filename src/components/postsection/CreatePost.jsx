@@ -7,21 +7,52 @@ import PopupExitPost from "./PopupExitPost";
 import MakeEditor from "../editor/MakeEditor";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
+import Tag from "./Tag";
 export default function CreatePost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [topic, setTopic] = useState("");
   const [tag, setTag] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const handleTagSelect = (tagName) => {
+    setSelectedTags((prevSelectedTags) =>
+      prevSelectedTags.includes(tagName)
+        ? prevSelectedTags.filter((tag) => tag !== tagName)
+        : [...prevSelectedTags, tagName]
+    );
+  };
+  const [taglist, setTaglist] = useState([
+    "Cal1",
+    "Vector",
+    "Derivatives of functions of one variable",
+    "Indefinite integral",
+    "Definite integral",
+
+    "Cal2",
+    "First order differential equations",
+    "Second order linear differential equations with constant coefficients",
+    "Functions of several variables and partial derivatives",
+    "Graphs in two and three – dimensional space",
+    "Multiple integrals",
+
+    "Cal3",
+    "Vector calculus",
+    "Functions of complex variable",
+    "Infinite series",
+    "Fourier series",
+  ]);
+
   const { getIP } = IPconfig();
   const createPostAPI = async () => {
     const serverIP = getIP();
-    console.log("data",data);
+
+    console.log("data", data);
     await axios
       .post(serverIP + "/posts/create", {
         topic,
-        tag: JSON.stringify(tag),
-        detail: JSON.stringify(data, null, 2).slice(1,-1),
+        tag: JSON.stringify(selectedTags),
+        detail: JSON.stringify(data, null, 2).slice(1, -1),
         cookie: "",
       })
       .then((res) => {
@@ -38,12 +69,12 @@ export default function CreatePost(props) {
   }, []);
 
   const DataPost = () => {
-    setData(JSON.stringify(data, null, 2))
+    setData(JSON.stringify(data, null, 2));
+    console.log(selectedTags);
     // console.log(JSON.stringify(data, null, 2));
     // console.log(JSON.parse(JSON.stringify(data, null, 2)))
     createPostAPI();
 
-    
     // console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
   };
 
@@ -93,6 +124,21 @@ export default function CreatePost(props) {
         />
       </div>
       <br />
+      <div className="Postbox">
+        {taglist.map((name, i) => {
+          return (
+            <Tag
+              tagname={name}
+              key={i}
+              selectedTags={selectedTags}
+              onTagSelect={handleTagSelect}
+            />
+          );
+        })}
+        <div className="SelectedTags">
+          <strong>Selected Tags:</strong> {selectedTags.join(", ")}
+        </div>
+      </div>
 
       <div className="Postbox">
         <MakeEditor SetEditorValue={setData} />
