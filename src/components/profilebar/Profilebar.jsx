@@ -42,7 +42,7 @@ const ProfileBar = (props) => {
     localStorage.setItem("token", "");
     // You can perform any additional logout logic here
     props.Logout();
-    if (location.pathname === "/Create-Post" || location.pathname === "/my-post") navigate("/");
+    if (location.pathname === "/Create-Post" || location.pathname === "/my-post" | location.pathname === "/bookmark") navigate("/");
     // Close the popup after logout
     setLogoutPopupVisible(false);
   }

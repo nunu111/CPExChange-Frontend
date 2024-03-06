@@ -19,6 +19,7 @@ export default function Post(props) {
   const PID = params.PID;
   const { getIP } = IPconfig();
   const [postsection, setPostsection] = useState({
+    id : "",
     topic: "",
     detail: "",
     create_at: "",
@@ -26,7 +27,7 @@ export default function Post(props) {
     like_count: 0,
   });
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(props.is_like);
   const [commentsection, setCommentsection] = useState([]);
 
   const serVerifyTopic = () => {
@@ -44,9 +45,13 @@ export default function Post(props) {
     setCommentsection(sortedComments);
   };
   const getPostAPI = async () => {
+
     const serverIP = getIP();
-    const resp = await axios
-      .get(serverIP + "/posts?postId=" + PID)
+    await axios
+      .get(serverIP + `/posts?postId=${PID}` ,
+      {headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }} )
       .then((res) => {
         console.log("resPost : ", res.data);
         setPostsection(res.data);
@@ -59,7 +64,9 @@ export default function Post(props) {
   const getCommentAPI = async () => {
     const serverIP = getIP();
     await axios
-      .get(serverIP + "/comments?post_id=" + PID)
+      .get(serverIP + `/comments?postId=${PID}`,{headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }} )
       .then((res) => {
         console.log("resComment : ", res.data);
         setCommentsection(res.data);

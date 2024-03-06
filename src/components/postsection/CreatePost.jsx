@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import Editor from "./Editor";
+
 import PopupExitPost from "./PopupExitPost";
 import MakeEditor from "../editor/MakeEditor";
 import axios from "axios";
@@ -54,7 +54,11 @@ export default function CreatePost(props) {
         tag: JSON.stringify(selectedTags),
         detail: JSON.stringify(data, null, 2).slice(1, -1),
         cookie: "",
-      })
+      },
+      {headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }},
+      )
       .then((res) => {
         console.log(res.data);
       })

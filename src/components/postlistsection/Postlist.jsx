@@ -23,6 +23,7 @@ const PostList = (props) => {
   const serverIP = getIP();
 
   useEffect(() => {
+    if(!props.isNoMorePost) {
     const handleScroll = () => {
       // Calculate the distance from the bottom
       const distanceFromBottom =
@@ -55,6 +56,7 @@ const PostList = (props) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }
   }, [isFetching]);
 
   return (
@@ -85,15 +87,16 @@ const PostList = (props) => {
             isVerify={Post.has_verify}
             comment={Post.commentCount}
             like={Post.like_count}
-            bywho={Post.profileName}
+            displayname={Post.profile_name}
             PID={Post.id}
             history ={location.pathname}
+            is_like = {Post.is_like}
             key={i}
           />
         );
       })}
 
-      {isFetching && <div className="loader"></div>}
+      {!props.isNoMorePost && isFetching && <div className="loader"></div>}
     </div>
   );
 };

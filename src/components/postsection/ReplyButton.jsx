@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Editor from "./Editor";
+import MakeEditor from "../editor/MakeEditor";
+
 
 const ReplyButton = ({ onReplySubmit }) => {
   const [replyText, setReplyText] = useState("");
@@ -26,10 +27,8 @@ const ReplyButton = ({ onReplySubmit }) => {
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
           ></textarea> } */}
-      <Editor
-        onChange={(editorData) => setData(editorData)}
-        editorLoaded={editorLoaded}
-      />
+          <MakeEditor SetEditorValue={setData}/>
+
       <button className="replyButton" onClick={handleReplySubmit}>
         Submit Reply
       </button>
