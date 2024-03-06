@@ -32,7 +32,7 @@ const Postbox = (props) => {
         dangerouslySetInnerHTML={{ __html: props.detail }}
       />
 
-      <div className="transparent"></div>
+      {/* <div className="transparent"></div> */}
       <br />
 
       <span className="CLV">

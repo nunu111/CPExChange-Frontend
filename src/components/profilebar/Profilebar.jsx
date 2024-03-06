@@ -102,7 +102,7 @@ const ProfileBar = (props) => {
 
         <hr className="barhr" />
         <ProfileButton Detail="หน้าแรก" Img={homeIcon} path={"/"} />
-        <ProfileButton Detail="สำรวจ" Img={explorIcon} path={""} />
+        <ProfileButton Detail="สำรวจ" Img={explorIcon} path={"/tag"} />
         {props.isLogin() && (
           <ProfileButton
             Detail="โพสต์ของฉัน"

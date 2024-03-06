@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Homepage from "./pages/Homepage";
 import Postpage from "./pages/Postpage";
+
 import { Login } from "./components/function/Login";
 import CreatePostpage from "./pages/CreatePostpage";
 import MyPostPage from "./pages/MyPostPage";
@@ -10,6 +11,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { IPconfig } from "./components/function/IPconfig";
 import { render } from "react-dom";
+import TagPage from "./pages/TagPage";
 function App() {
   const { nowLogin, isLogin, logout ,getName } = Login();
   const { getIP } = IPconfig();
@@ -50,6 +52,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/tag" element={<TagPage
+              isLogin={isLogin}
+              nowLogin={nowLogin}
+              Logout={logout}
+              getName={getName}/>}/>
         <Route path="/my-post" element={<MyPostPage 
               isLogin={isLogin}
               nowLogin={nowLogin}

@@ -6,6 +6,7 @@ import CreatePost from "../postsection/CreatePost";
 import { Link,useLocation } from "react-router-dom";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
+import Tag from "../postsection/Tag";
 const PostList = (props) => {
   const [PostList, setPostList] = useState([]);
 
@@ -13,10 +14,37 @@ const PostList = (props) => {
   const [page, setPage] = useState(1);
   const { getIP } = IPconfig();
   const location = useLocation();
-  
+  const [selectedTags, setSelectedTags] = useState([]);
+  const handleTagSelect = (tagName) => {
+    setSelectedTags((prevSelectedTags) =>
+      prevSelectedTags.includes(tagName)
+        ? prevSelectedTags.filter((tag) => tag !== tagName)
+        : [...prevSelectedTags, tagName]
+    );
+  };
+  const [taglist, setTaglist] = useState([
+    "Cal1",
+    "Vector",
+    "Derivatives of functions of one variable",
+    "Indefinite integral",
+    "Definite integral",
+
+    "Cal2",
+    "First order differential equations",
+    "Second order linear differential equations with constant coefficients",
+    "Functions of several variables and partial derivatives",
+    "Graphs in two and three – dimensional space",
+    "Multiple integrals",
+
+    "Cal3",
+    "Vector calculus",
+    "Functions of complex variable",
+    "Infinite series",
+    "Fourier series",
+  ]);
+
   useEffect(() => {
-    props.getPageAPI(serverIP, page, PostList, setPostList);
-    // getPageAPI();
+    props.getPageAPI(serverIP, page, PostList, setPostList,selectedTags);
     console.log(PostList);
   }, []);
 
@@ -69,6 +97,19 @@ const PostList = (props) => {
           </Link>
         </div>
       )}
+      {
+        location.pathname === "/tag" && taglist.map((name, i) => {
+          return (
+            <Tag
+              tagname={name}
+              key={i}
+              selectedTags={selectedTags}
+              onTagSelect={handleTagSelect}
+            />
+          );
+        })
+      }
+
       { location.pathname === "/" &&
       <div className="Topicbox">
         <span className="Text">โพสต์ยอดฮิต</span>

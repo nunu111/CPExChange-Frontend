@@ -27,7 +27,7 @@ export default function Post(props) {
     like_count: 0,
   });
 
-  const [isLiked, setIsLiked] = useState(props.is_like);
+  const [isLiked, setIsLiked] = useState(false);
   const [commentsection, setCommentsection] = useState([]);
 
   const serVerifyTopic = () => {
@@ -54,6 +54,7 @@ export default function Post(props) {
       }} )
       .then((res) => {
         console.log("resPost : ", res.data);
+        setIsLiked(res.data.is_like==="true");
         setPostsection(res.data);
       })
       .catch((err) => {
@@ -64,7 +65,7 @@ export default function Post(props) {
   const getCommentAPI = async () => {
     const serverIP = getIP();
     await axios
-      .get(serverIP + `/comments?postId=${PID}`,{headers: {
+      .get(serverIP + `/posts/${PID}/comments`,{headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }} )
       .then((res) => {
@@ -80,7 +81,7 @@ export default function Post(props) {
     const token = localStorage.getItem('token');
     const serverIP = getIP();
     await axios
-      .put(serverIP + "/post/like?postId=" + PID,
+      .put(serverIP + `/post/like?postId=${PID}` ,
       null
       ,
       {headers: { Authorization: `Bearer ${token}` }})
@@ -194,7 +195,7 @@ export default function Post(props) {
             const reply = Array.isArray(com.reply) ? com.reply : [];
             return (
               <Comment
-                CommentID={com.comment_id}
+                CommentID={com.id}
                 displayName={com.profile_name}
                 LikeAmount={com.like_count}
                 hasVerify={com.is_verify}

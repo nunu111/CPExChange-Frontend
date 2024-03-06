@@ -5,12 +5,59 @@ import heartIcon from "../Icon/heart.svg";
 import verifyIcon from "../Icon/verify.svg";
 import unknowIcon from "../Icon/unknow.svg";
 import ReplyButton from "./ReplyButton";
-
+import { IPconfig } from "../function/IPconfig";
+import axios from "axios";
 export default function Comment(props) {
+  const { getIP } = IPconfig();
   const [isVerify, setIsVerify] = useState(true);
   const [commentID, setCommentID] = useState(props.CommentID);
-
+  const [replylist, setReplylist] = useState([]);
+  const [data, setData] = useState("");
   const [text, setText] = useState("");
+
+const [replyList, setReplyList] = useState([]);
+
+
+useEffect(() => {
+  getReplyAPI();
+},[])
+
+const getReplyAPI = async () => {
+  const serverIP = getIP();
+  await axios.get(serverIP + `/comments/${props.CommentID}/replys`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => {
+      console.log("resReply : ", res.data);
+      setReplylist(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+  const replyAPI = async () => {
+    console.log("glc",props.CommentID)
+    const serverIP = getIP();
+      await axios
+        .post(serverIP + `/replys/create` ,
+        {
+          commentID : props.CommentID,
+          detail : JSON.stringify(data, null, 2).slice(1,-1),
+        },
+        {headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }} )
+        .then((res) => {
+          console.log("resPost : ", res.data);
+  
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
 
   const handleHtmlChange = (event) => {
     const htmlContent = event.target.value;
@@ -48,7 +95,22 @@ export default function Comment(props) {
         </div>
       </div>
       <p dangerouslySetInnerHTML={{ __html: props.detail }} />
-      {props.isLogin() && <ReplyButton />}
+      {props.isLogin() && !(props.reply === null)&& <ReplyButton setData={setData} replyAPI={replyAPI}/>}
+      {
+        replylist.map((com, i) =>{
+          return <Comment
+          CommentID={com.id}
+          displayName={com.profile_name}
+          LikeAmount={com.like_count}
+          hasVerify={com.is_verify}
+          reply={null}
+          CreateDate={com.create_at}
+          detail={com.detail}
+          isLogin={props.isLogin}
+          key={i}
+        />
+        })
+      }
     </div>
   );
 }

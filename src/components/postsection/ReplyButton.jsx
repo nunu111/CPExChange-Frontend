@@ -2,22 +2,14 @@ import React, { useState, useEffect } from "react";
 import MakeEditor from "../editor/MakeEditor";
 
 
-const ReplyButton = ({ onReplySubmit }) => {
-  const [replyText, setReplyText] = useState("");
-  const [editorLoaded, setEditorLoaded] = useState(false);
-  const [data, setData] = useState("");
+const ReplyButton = ({ onReplySubmit ,setData , replyAPI}) => {
 
-  useEffect(() => {
-    setEditorLoaded(true);
-  }, []);
+
 
   const handleReplySubmit = () => {
-    if (replyText.trim() !== "") {
-      onReplySubmit(replyText);
-    }
-
-    setReplyText("");
-    console.log(data);
+    replyAPI()
+    setData("");
+    window.location.reload()
   };
 
   return (
@@ -28,7 +20,6 @@ const ReplyButton = ({ onReplySubmit }) => {
             onChange={(e) => setReplyText(e.target.value)}
           ></textarea> } */}
           <MakeEditor SetEditorValue={setData}/>
-
       <button className="replyButton" onClick={handleReplySubmit}>
         Submit Reply
       </button>

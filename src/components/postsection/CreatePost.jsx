@@ -16,6 +16,7 @@ export default function CreatePost(props) {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const handleTagSelect = (tagName) => {
+    console.log(selectedTags)
     setSelectedTags((prevSelectedTags) =>
       prevSelectedTags.includes(tagName)
         ? prevSelectedTags.filter((tag) => tag !== tagName)
@@ -152,7 +153,7 @@ export default function CreatePost(props) {
         style={{ textAlign: "right", marginTop: "20px", left: "1200px" }}
       >
         <div className="nounderline" onClick={DataPost}>
-          <Link to="/" className="goback">
+          <Link to="/" className="goback" >
             {"POST"}
           </Link>
         </div>
