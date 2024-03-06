@@ -8,7 +8,7 @@ import MakeEditor from "../editor/MakeEditor";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 import Tag from "./Tag";
-export default function CreatePost(props) {
+export default function EditPost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [topic, setTopic] = useState("");
@@ -157,7 +157,7 @@ export default function CreatePost(props) {
       >
         <div className="nounderline" onClick={DataPost}>
           <Link to="/" className="goback">
-            {"POST"}
+            {"REPOST"}
           </Link>
         </div>
       </div>
