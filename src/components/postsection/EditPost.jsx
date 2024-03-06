@@ -8,7 +8,7 @@ import MakeEditor from "../editor/MakeEditor";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 import Tag from "./Tag";
-export default function CreatePost(props) {
+export default function EditPost(props) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [topic, setTopic] = useState("");
@@ -16,7 +16,6 @@ export default function CreatePost(props) {
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const handleTagSelect = (tagName) => {
-    console.log(selectedTags)
     setSelectedTags((prevSelectedTags) =>
       prevSelectedTags.includes(tagName)
         ? prevSelectedTags.filter((tag) => tag !== tagName)
@@ -157,8 +156,8 @@ export default function CreatePost(props) {
         style={{ textAlign: "right", marginTop: "20px", left: "1200px" }}
       >
         <div className="nounderline" onClick={DataPost}>
-          <Link to="/" className="goback" >
-            {"POST"}
+          <Link to="/" className="goback">
+            {"REPOST"}
           </Link>
         </div>
       </div>

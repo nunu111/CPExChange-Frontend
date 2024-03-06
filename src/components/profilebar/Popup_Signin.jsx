@@ -42,7 +42,7 @@ const Signin = (props) => {
           if (err.response.status === 400) {
             setPasswordError("Username or password is incorrect.");
           }
-          console.error("Error:", err);
+          console.error("Error123:", err);
         });
     };
 
@@ -60,7 +60,13 @@ const Signin = (props) => {
         }
       })
       .catch((err) => {
-        console.error("Error:", err);
+        if (
+          err.response.status === 400 &&
+          err.response.data.username === "false"
+        ) {
+          setEmailError("this username is already exist");
+        }
+        console.error("Error123s:", err.response);
       });
   };
 

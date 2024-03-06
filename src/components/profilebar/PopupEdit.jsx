@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import unknowIcon from "../Icon/unknow.svg";
 import XIcon from "../Icon/X.svg";
+import axios from "axios";
+import { IPconfig } from "../function/IPconfig";
 
-const PopupEdit = ({ visible, onClose, onEdit }) => {
+const PopupEdit = ({ visible, onClose, onEdit, LoginState }) => {
   const [newdisplayname, setNewdisplayname] = useState("");
   const [newusername, setNewusername] = useState("");
   const [newpassword, setNewpassword] = useState("");
@@ -11,11 +13,42 @@ const PopupEdit = ({ visible, onClose, onEdit }) => {
   const [newemailError, setNewEmailError] = useState("");
   const [newpasswordError, setNewPasswordError] = useState("");
   const [newdisplaynameError, setNewDisplaynameError] = useState("");
-  const [displaynameText, setDisplaynameText] = useState("Name99");
-  const [usernameText, setUsernameText] = useState("Username99");
-  const [passwordText, setPasswordText] = useState("123456");
-  const [profileImageText, setProfileImageText] = useState("nunu111.png");
   const [roleText, setRoleText] = useState("ผู้ใช้ทั่วไป");
+  const { getIP } = IPconfig();
+
+  const EditAPI = async () => {
+    const serverIP = getIP();
+    const sending = {
+      username: newusername,
+      profileName: newdisplayname,
+      password: newpassword,
+    };
+
+    await axios
+      .post(serverIP + "/user/edit", sending, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          LoginState(response.data.profileName);
+
+          window.location.reload(false);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          if (err.response.data.username === "false") {
+            setNewEmailError("Username already exists");
+          } else if (err.response.data.profileName === "false") {
+            setNewDisplaynameError("Display name already exists");
+          } else {
+            console.error("Error123:", err);
+          }
+        } else {
+          console.error("Error:", err);
+        }
+      });
+  };
 
   const validateInputs = () => {
     // Set initial error values to empty
@@ -50,7 +83,6 @@ const PopupEdit = ({ visible, onClose, onEdit }) => {
     }
 
     // Inputs are valid
-    return true;
   };
 
   const handleEdit = () => {
@@ -70,12 +102,9 @@ const PopupEdit = ({ visible, onClose, onEdit }) => {
       setNewpassword("");
       setNewpassword1("");
 
-      setDisplaynameText(newdisplayname || "Name99");
-      setUsernameText(newusername || "Username99");
-      setPasswordText(newpassword || "123456");
-      setProfileImageText(newdisplayname || "nunu111.png");
       setRoleText(roleText || "ผู้ใช้ทั่วไป");
     }
+    EditAPI();
   };
 
   if (!visible) return null;
@@ -88,10 +117,6 @@ const PopupEdit = ({ visible, onClose, onEdit }) => {
             <img src={unknowIcon} className="profile" alt="profile" />
           </div>
           <div className="textContainer">
-            <p className="text">Displayname : {displaynameText}</p>
-            <p className="text">Username : {usernameText}</p>
-            <p className="text">Password : {passwordText}</p>
-            <p className="text">Profile image : {profileImageText}</p>
             <p className="text">Role :{roleText}</p>
             <p className="text">Edit Profile</p>
           </div>
@@ -141,7 +166,7 @@ const PopupEdit = ({ visible, onClose, onEdit }) => {
           <input
             className="viewButton"
             type="button"
-            onClick={() => handleEdit()}
+            onClick={handleEdit}
             value="บันทึก"
           />
           <img

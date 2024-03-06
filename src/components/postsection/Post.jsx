@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams,withRouter } from "react-router-dom";
+import { Link, useParams, withRouter } from "react-router-dom";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
-
+import editIcon from "../Icon/edit.svg";
 import pinIcon from "../Icon/pin.svg";
 import heartIcon from "../Icon/heart.svg";
 import likedIcon from "../Icon/liked.svg";
-
+import PopupDelPost from "./PopupDelPost";
 import PostTag from "../posttag";
 import Comment from "./Comment";
 import CommentButton from "./CommentButton";
-
+import EditPost from "./EditPost";
 import "./Post.css";
 import "./Comment.css";
 
 export default function Post(props) {
+  const [popupVisible, setPopupVisible] = useState(false);
+  const handleGoBack = () => {
+    setPopupVisible(true);
+  };
+
+  const handlePopupClose = () => {
+    // Close the popup
+    setPopupVisible(false);
+  };
+
+  const handleConfirmDelete = () => {
+    // Close the popup after handling the confirmation
+    setPopupVisible(false);
+    delPostAPI();
+  };
   const params = useParams();
   const PID = params.PID;
   const { getIP } = IPconfig();
   const [postsection, setPostsection] = useState({
-    id : "",
+    id: "",
     topic: "",
     detail: "",
     create_at: "",
@@ -44,14 +59,32 @@ export default function Post(props) {
 
     setCommentsection(sortedComments);
   };
-  const getPostAPI = async () => {
 
+  const delPostAPI = async () => {
+    const serverIP = getIP();
+
+    try {
+      const response = await axios.delete(`${serverIP}/posts/${PID}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setPostsection(response.data);
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      console.log("Failed to delete post");
+    }
+  };
+
+  const getPostAPI = async () => {
     const serverIP = getIP();
     await axios
-      .get(serverIP + `/posts?postId=${PID}` ,
-      {headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }} )
+      .get(serverIP + `/posts?postId=${PID}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         console.log("resPost : ", res.data);
         setIsLiked(res.data.is_like==="true");
@@ -78,7 +111,7 @@ export default function Post(props) {
   };
 
   const LikeAPI = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const serverIP = getIP();
     await axios
       .put(serverIP + `/post/like?postId=${PID}` ,
@@ -92,12 +125,12 @@ export default function Post(props) {
   };
 
   const UnlikeAPI = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const serverIP = getIP();
     await axios
-      .put(serverIP + `/post/unlike?postId=${PID}` ,
-      null,
-      {headers: { Authorization: `Bearer ${token}` }})
+      .put(serverIP + `/post/unlike?postId=${PID}`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setIsLiked(false);
       })
@@ -139,7 +172,22 @@ export default function Post(props) {
 
       <div className="EachPostbox">
         <div className="Title">{postsection.topic}</div>
-        <div className="top">
+        <div className="top" style={{ marginLeft: "10px" }}>
+          <div>
+            <img
+              src={editIcon}
+              alt="Liked"
+              className="like"
+              style={{ marginLeft: "50px" }}
+              onClick={handleGoBack}
+            />
+            {popupVisible && (
+              <PopupDelPost
+                onConfirm={handleConfirmDelete}
+                onClose={handlePopupClose}
+              />
+            )}
+          </div>
           {isLiked ? (
             <img
               src={likedIcon}

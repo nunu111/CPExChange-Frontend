@@ -42,7 +42,11 @@ const ProfileBar = (props) => {
     localStorage.setItem("token", "");
     // You can perform any additional logout logic here
     props.Logout();
-    if (location.pathname === "/Create-Post" || location.pathname === "/my-post" | location.pathname === "/bookmark") navigate("/");
+    if (
+      location.pathname === "/Create-Post" ||
+      location.pathname === "/my-post"
+    )
+      navigate("/");
     // Close the popup after logout
     setLogoutPopupVisible(false);
   }
@@ -91,6 +95,7 @@ const ProfileBar = (props) => {
           visible={editPopupVisible}
           onClose={() => setEditPopupVisible(false)}
           onEdit={Edit}
+          LoginState={props.nowLogin}
         />
 
         {/* Logout Popup */}

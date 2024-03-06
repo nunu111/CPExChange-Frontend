@@ -14,7 +14,7 @@ const PopupExit = ({ visible, onClose, onLogout }) => {
               className="viewButton"
               type="button"
               onClick={onLogout}
-              value={"Exit"}
+              value={"Log out"}
             />
           </div>
           <div>
