@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Editor from "./Editor";
+
 import { IPconfig } from "../function/IPconfig";
 import axios from "axios";
 import MakeEditor from "../editor/MakeEditor";
