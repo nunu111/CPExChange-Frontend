@@ -24,24 +24,22 @@ function App() {
     const token = localStorage.getItem('token');
     if (!token) {
       // Perform your action if the item doesn't exist
-      console.log('Your item does not exist in localStorage. Performing some action...');
       // For example, you can set a default value or initialize the item
       localStorage.setItem('token', '');
     }else{
       CheckAuthAPI(token);
-      console.log('Your item exists in localStorage. Performing some action...');
     }
     // The dependency array is empty to run this effect only once when the component mounts
   }, []);
 
   const CheckAuthAPI = async (token) => {
-
     const serverIP = getIP();
     await axios
-      .get(serverIP + "v1/guests/isAuth",
+      .get(serverIP + "/v1/guests/isAuth",
       {headers: { Authorization: `Bearer ${token}` }})
       .then((res) => {
-        nowLogin(res.data);
+        console.log("res", res.data.profileName);
+        nowLogin(res.data.profileName);
       })
       .catch((err) => {
         console.log("Error Auth:", err);

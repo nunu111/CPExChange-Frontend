@@ -11,7 +11,7 @@
 
 .editor{
     background-color: white;
-  
+    
 }
 .editor .icon:hover{
     background-color: #d9d9d9;
@@ -21,7 +21,7 @@
     background-color: lightblue;
     transition: 0.3s ease-in-out;
     
-    
+
 }
 .main_editor{
     background-color: white;
@@ -39,3 +39,12 @@
 .toolbar-class {
     border: 1px solid #ccc;
 }
+.LatexEditor{
+    height: 500px;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.ql-toolbar {
+    height: 50px; /* Adjust the height according to your preference */
+  }

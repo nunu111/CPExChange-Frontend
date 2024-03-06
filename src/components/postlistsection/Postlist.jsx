@@ -3,7 +3,7 @@ import "./Postlist.css";
 import Postbox from "./Postbox";
 import editIcon from "../Icon/editbig.svg";
 import CreatePost from "../postsection/CreatePost";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 const PostList = (props) => {
@@ -12,32 +12,15 @@ const PostList = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [page, setPage] = useState(1);
   const { getIP } = IPconfig();
+  const location = useLocation();
+  
   useEffect(() => {
-    getPageAPI();
+    props.getPageAPI(serverIP, page, PostList, setPostList);
+    // getPageAPI();
     console.log(PostList);
   }, []);
 
   const serverIP = getIP();
-
-  const getPageAPI = async () => {
-    console.log("Check Postlist1", PostList);
-    await axios
-      .get(serverIP + "/pages?page=" + page)
-      .then((res) => {
-        console.log("res", res.data);
-        setPostList(PostList.concat(res.data));
-
-        console.log("Check Postlist2", PostList);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
-
-    // window.scrollTo({
-    //   top: document.documentElement.scrollTop - 80, // Adjust the value as needed
-    //   behavior: "smooth", // Use 'auto' for instant scroll or 'smooth' for smooth scroll
-    // });
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +35,8 @@ const PostList = (props) => {
         setIsFetching(true);
         console.log(page);
         setPage(page + 1);
-        getPageAPI();
+        props.getPageAPI(serverIP, page+1, PostList, setPostList);
+        // getPageAPI();
         // Simulate fetching more data (replace with your actual fetching logic)
         // For demonstration purposes, we're using a setTimeout here
         setTimeout(() => {
@@ -75,7 +59,7 @@ const PostList = (props) => {
 
   return (
     <div className="Mainbox">
-      {props.isLogin() && (
+      {props.isLogin() && location.pathname === "/" && (
         <div>
           <Link to="/Create-Post" className="CreatePostButton">
             <img src={editIcon} className="icon" alt="edit" />
@@ -83,12 +67,13 @@ const PostList = (props) => {
           </Link>
         </div>
       )}
+      { location.pathname === "/" &&
       <div className="Topicbox">
         <span className="Text">โพสต์ยอดฮิต</span>
         <span> / </span>
         <span className="Text"> โพสต์ล่าสุด</span>
       </div>
-      
+      }
       {PostList.map((Post, i) => {
         const taglist = Array.isArray(Post.taglist) ? Post.taglist : [];
         return (
@@ -102,6 +87,7 @@ const PostList = (props) => {
             like={Post.like_count}
             bywho={Post.profileName}
             PID={Post.id}
+            history ={location.pathname}
             key={i}
           />
         );

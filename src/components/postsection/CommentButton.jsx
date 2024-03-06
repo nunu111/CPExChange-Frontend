@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import { IPconfig } from "../function/IPconfig";
 import axios from "axios";
+import MakeEditor from "../editor/MakeEditor";
 function CommentButton(props) {
   const [isCommentFormVisible, setCommentFormVisible] = useState(false);
 
@@ -10,12 +11,16 @@ function CommentButton(props) {
   const { getIP } = IPconfig();
 
   const CreateCommnetAPI = async () => {
+    const token = localStorage.getItem('token');
     const serverIP = getIP();
-    await axios.post(serverIP + "/comments/create", {
-      PostID: props.PID,
-      detail: data,
-      cookie: "cookie",
-    });
+
+    await axios.post(serverIP + "/comments/create", 
+    {
+      postID: props.PID,
+      detail: JSON.stringify(data, null, 2).slice(1,-1),
+    }
+    ,{headers: { Authorization: `Bearer ${token}` }},
+    );
     props.setComment();
   };
 
@@ -25,29 +30,17 @@ function CommentButton(props) {
 
   const handleCommentButtonClick = () => {
     setCommentFormVisible(!isCommentFormVisible);
+    console.log(JSON.stringify(data, null, 2).slice(1,-1))
     CreateCommnetAPI();
-    setData(""); // Clear the text field when the button is clicked
-    DataPost(); // Call DataPost function when the button is clicked
+
   };
 
-  const handleCommentSubmit = () => {
-    // You can perform additional actions here, e.g., send commentText to the server
-  };
-
-  const DataPost = () => {
-    console.log(data);
-    console.log(JSON.stringify(data.replace(/<\/?p>/g, "")));
-    // Add any additional logic or API calls here based on your requirements
-  };
 
   return (
     <div>
       {/* {isCommentFormVisible && ( */}
       <div>
-        <Editor
-          onChange={(editorData) => setData(editorData)}
-          editorLoaded={editorLoaded}
-        />
+        <MakeEditor SetEditorValue={setData} />
       </div>
       {/* )} */}
       <button className="commentButton" onClick={handleCommentButtonClick}>

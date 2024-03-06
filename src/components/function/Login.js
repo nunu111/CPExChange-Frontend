@@ -19,6 +19,7 @@ export function Login() {
   }
 
   function logout () {
+    localStorage.setItem('token', '');
     setLogin(false);
   };
   return {

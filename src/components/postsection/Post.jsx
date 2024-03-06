@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,withRouter } from "react-router-dom";
 import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 
@@ -59,7 +59,7 @@ export default function Post(props) {
   const getCommentAPI = async () => {
     const serverIP = getIP();
     await axios
-      .get(serverIP + "/comments?commentId=" + PID)
+      .get(serverIP + "/comments?post_id=" + PID)
       .then((res) => {
         console.log("resComment : ", res.data);
         setCommentsection(res.data);
@@ -70,9 +70,13 @@ export default function Post(props) {
   };
 
   const LikeAPI = async () => {
+    const token = localStorage.getItem('token');
     const serverIP = getIP();
     await axios
-      .get(serverIP + "/posts/like?postId=" + PID)
+      .put(serverIP + "/post/like?postId=" + PID,
+      null
+      ,
+      {headers: { Authorization: `Bearer ${token}` }})
       .then((res) => {
         setIsLiked(true);
       })
@@ -80,9 +84,12 @@ export default function Post(props) {
   };
 
   const UnlikeAPI = async () => {
+    const token = localStorage.getItem('token');
     const serverIP = getIP();
     await axios
-      .get(serverIP + "/posts/unlike?postId=" + PID)
+      .put(serverIP + `/post/unlike?postId=${PID}` ,
+      null,
+      {headers: { Authorization: `Bearer ${token}` }})
       .then((res) => {
         setIsLiked(false);
       })
@@ -132,6 +139,7 @@ export default function Post(props) {
               className="like"
               onClick={() => {
                 setIsLiked(!isLiked);
+                UnlikeAPI();
                 postsection.like_count = Number(postsection.like_count) - 1;
                 setPostsection({ ...postsection });
               }}
@@ -143,6 +151,7 @@ export default function Post(props) {
               className="like"
               onClick={() => {
                 setIsLiked(!isLiked);
+                LikeAPI();
                 postsection.like_count = Number(postsection.like_count) + 1;
                 setPostsection({ ...postsection });
               }}

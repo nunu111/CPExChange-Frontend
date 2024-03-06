@@ -15,7 +15,7 @@ import "react-quill/dist/quill.snow.css";
 // mathquill4quill include
 import mathquill4quill from "mathquill4quill";
 import "mathquill4quill/mathquill4quill.css";
-
+import "./editor.css";
 import katex from "katex";
 import "katex/dist/katex.css";
 window.katex = katex;
@@ -49,10 +49,12 @@ export default class Latexeditor extends Component {
   
   render() {
     return (
-      <div>
+      <div className='LatexEditor'>
       <ReactQuill
         ref={this.reactQuill}
         onChange={this.handleEditorChange}
+        className='LatexEditor'
+        
         modules={{
           formula: true,
           toolbar: [
@@ -78,10 +80,9 @@ export default class Latexeditor extends Component {
         placeholder="Type text here, or click on the formula button to enter math."
         theme="snow"
       />
-      <div>
-          <h2>Editor Content:</h2>
-          <div dangerouslySetInnerHTML={{ __html: this.state.editorContent }} />
-        </div>
+          {/* <h2>Editor Content:</h2>
+          <div dangerouslySetInnerHTML={{ __html: this.state.editorContent }} /> */}
+
       </div>
     )
   }

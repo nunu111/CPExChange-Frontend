@@ -25,13 +25,35 @@ const Signin = (props) => {
       password,
     };
 
-    const resp = await axios
+    const LoginAPI = async () => {
+      const sending = {
+        username: username,
+        password,
+      };
+      // console.log(JSON.stringify(sending));
+      // console.log(serverIP)
+      await axios
+        .post(serverIP + "/guests/login", sending)
+        .then((res) => {
+          if (res.status === 200) props.LoginState(res.data.profileName);
+          localStorage.setItem("token", res.data.token);
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            setPasswordError("Username or password is incorrect.");
+          }
+          console.error("Error:", err);
+        });
+    };
+
+    await axios
       .post(serverIP + "/guests/signup", sending)
       .then((res) => {
         console.log("res", res.data);
         if (res.status === 201) {
           props.LoginState(displayname);
           // alert("Signup successful!");
+          LoginAPI();
           togglePopupVisibility();
         } else {
           // alert("Signup unsuccessful!");
