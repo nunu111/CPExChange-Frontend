@@ -17,6 +17,26 @@ const Signin = (props) => {
   const { isPopupVisible, togglePopupVisibility } = props;
   const [isSignin, setIsSignin] = useState(false);
   const { getIP } = IPconfig();
+
+  const LoginAPI = async () => {
+    const serverIP = getIP();
+    const sending = {
+      username: username,
+      password,
+    };
+    await axios
+      .post(serverIP + "/guests/login", sending)
+      .then((res) => {
+        if (res.status === 200) props.LoginState(res.data.profileName);
+        localStorage.setItem("token", res.data.token);
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          setPasswordError("Username or password is incorrect.");
+        }
+        console.error("Error123:", err);
+      });
+  };
   const SigninAPI = async () => {
     const serverIP = getIP();
     const sending = {
@@ -24,28 +44,7 @@ const Signin = (props) => {
       profileName: displayname,
       password,
     };
-
-    const LoginAPI = async () => {
-      const sending = {
-        username: username,
-        password,
-      };
-      // console.log(JSON.stringify(sending));
-      // console.log(serverIP)
-      await axios
-        .post(serverIP + "/guests/login", sending)
-        .then((res) => {
-          if (res.status === 200) props.LoginState(res.data.profileName);
-          localStorage.setItem("token", res.data.token);
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setPasswordError("Username or password is incorrect.");
-          }
-          console.error("Error123:", err);
-        });
-    };
-
+    
     await axios
       .post(serverIP + "/guests/signup", sending)
       .then((res) => {
@@ -60,6 +59,7 @@ const Signin = (props) => {
         }
       })
       .catch((err) => {
+        alert("err")
         if (
           err.response.status === 400 &&
           err.response.data.username === "false"

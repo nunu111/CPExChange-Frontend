@@ -217,7 +217,7 @@ export default function Post(props) {
           <img src={pinIcon} alt="pin" className="bookmark" />
         </div>
         <p className="date">
-          โพสต์เมื่อ {postsection.create_at} {postsection.postowner}
+          โพสต์เมื่อ {postsection.create_at} by {postsection.profile_name}
         </p>
         <hr />
         {/* {postsection.tag.map((Tag, i) => {

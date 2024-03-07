@@ -12,6 +12,7 @@ import axios from "axios";
 import { IPconfig } from "./components/function/IPconfig";
 import { render } from "react-dom";
 import TagPage from "./pages/TagPage";
+import UnAuthPage from "./pages/UnAuthPage";
 function App() {
   const { nowLogin, isLogin, logout ,getName } = Login();
   const { getIP } = IPconfig();
@@ -52,6 +53,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/unAuth" element={<UnAuthPage/>} />
       <Route path="/tag" element={<TagPage
               isLogin={isLogin}
               nowLogin={nowLogin}

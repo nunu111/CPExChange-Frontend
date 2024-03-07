@@ -14,37 +14,11 @@ const PostList = (props) => {
   const [page, setPage] = useState(1);
   const { getIP } = IPconfig();
   const location = useLocation();
-  const [selectedTags, setSelectedTags] = useState([]);
-  const handleTagSelect = (tagName) => {
-    setSelectedTags((prevSelectedTags) =>
-      prevSelectedTags.includes(tagName)
-        ? prevSelectedTags.filter((tag) => tag !== tagName)
-        : [...prevSelectedTags, tagName]
-    );
-  };
-  const [taglist, setTaglist] = useState([
-    "Cal1",
-    "Vector",
-    "Derivatives of functions of one variable",
-    "Indefinite integral",
-    "Definite integral",
+  
 
-    "Cal2",
-    "First order differential equations",
-    "Second order linear differential equations with constant coefficients",
-    "Functions of several variables and partial derivatives",
-    "Graphs in two and three – dimensional space",
-    "Multiple integrals",
-
-    "Cal3",
-    "Vector calculus",
-    "Functions of complex variable",
-    "Infinite series",
-    "Fourier series",
-  ]);
 
   useEffect(() => {
-    props.getPageAPI(serverIP, page, PostList, setPostList,selectedTags);
+    props.getPageAPI(serverIP, page, PostList, setPostList);
     console.log(PostList);
   }, []);
 
@@ -64,7 +38,7 @@ const PostList = (props) => {
         setIsFetching(true);
         console.log(page);
         setPage(page + 1);
-        props.getPageAPI(serverIP, page+1, PostList, setPostList);
+        props.getPageAPI(serverIP, page, PostList, setPostList);
         // getPageAPI();
         // Simulate fetching more data (replace with your actual fetching logic)
         // For demonstration purposes, we're using a setTimeout here
@@ -88,35 +62,9 @@ const PostList = (props) => {
   }, [isFetching]);
 
   return (
-    <div className="Mainbox">
-      {props.isLogin() && location.pathname === "/" && (
-        <div>
-          <Link to="/Create-Post" className="CreatePostButton">
-            <img src={editIcon} className="icon" alt="edit" />
-            <span className="text">เขียนโพสต์...</span>
-          </Link>
-        </div>
-      )}
-      {
-        location.pathname === "/tag" && taglist.map((name, i) => {
-          return (
-            <Tag
-              tagname={name}
-              key={i}
-              selectedTags={selectedTags}
-              onTagSelect={handleTagSelect}
-            />
-          );
-        })
-      }
+    <div>
 
-      { location.pathname === "/" &&
-      <div className="Topicbox">
-        <span className="Text">โพสต์ยอดฮิต</span>
-        <span> / </span>
-        <span className="Text"> โพสต์ล่าสุด</span>
-      </div>
-      }
+
       {PostList.map((Post, i) => {
         const taglist = Array.isArray(Post.taglist) ? Post.taglist : [];
         return (

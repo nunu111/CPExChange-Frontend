@@ -39,9 +39,23 @@ export default function MakeEditor(props) {
     ["\\text{dx}", "\\text{dx}"],
     ["\\binom{n}{k}", "\\binom"],
     ["\\vec{x}","\\vec"],
-    ["a \\above{2pt} b+1","{}\\above{}"],
+    ["\\lim{x}","\\lim"],
+    ["\\\approx","\\approx"],
+    ["\\neq","\\neq"],
+    ["\\partial","\\partial"],
+    ["\\geq","\\geq"],
+    ["\\leq","\\leq"],
     ["\\hat{x}","\\hat"],
     ["\\check{x}","\\check"],
+    ["\\Delta","\\Delta"],
+    ["\\infty","\\infty"],
+    ["\\forall","\\forall"],
+    ["\\exists","\\exists"],
+    ["\\emptyset","\\emptyset"],
+    ["\\subset","\\subset"],
+    ["\\supset","\\supset"],
+    ["\\Theta","\\Theta"],
+    ["\\pi","\\\pi"]
     
   ];
   const [operators, setOperators] = useState(CUSTOM_OPERATORS);
@@ -55,8 +69,10 @@ export default function MakeEditor(props) {
 
   return (
     <div className="editor">
+      <div className="date">
       <span>Have problems with Latex?  </span>
-      <a href="https://katex.org/docs/support_table" target="_blank">Cliked here</a>
+      <a href="https://katex.org/docs/support_table" target="_blank" style={{textDecoration:"none"}}>Cliked here</a>
+      </div>
       <Latexeditor options={options} onEditorChange={handleParentEditorChange} SetEditorValue={props.SetEditorValue} key={JSON.stringify(options)} />
     </div>
   );

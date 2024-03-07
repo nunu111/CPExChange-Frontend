@@ -1,6 +1,6 @@
 // CreatePost.js
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
 import PopupExitPost from "./PopupExitPost";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { IPconfig } from "../function/IPconfig";
 import Tag from "./Tag";
 export default function CreatePost(props) {
+  
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [data, setData] = useState("");
   const [topic, setTopic] = useState("");
@@ -43,8 +44,7 @@ export default function CreatePost(props) {
     "Infinite series",
     "Fourier series",
   ]);
-
-  const { getIP } = IPconfig();
+  
   const createPostAPI = async () => {
     const serverIP = getIP();
 
@@ -73,7 +73,27 @@ export default function CreatePost(props) {
     console.log(data);
   };
 
+  const navigate = useNavigate();
+  const { getIP } = IPconfig();
+  const CheckAuthAPI = async () => {
+    const serverIP = getIP();
+    await axios
+      .get(serverIP + "/v1/guests/isAuth",
+      {headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }})
+      .then((res) => {
+        
+      })
+      .catch((err) => {
+        console.log("Error Auth:", err);
+        if(err.response.status === 401) {
+          navigate("/unAuth");
+        }
+      });
+      console.log("pass");
+  }
+
   useEffect(() => {
+    CheckAuthAPI();
     setEditorLoaded(true);
   }, []);
 

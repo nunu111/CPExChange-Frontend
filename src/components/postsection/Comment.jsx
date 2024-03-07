@@ -100,11 +100,11 @@ const getReplyAPI = async () => {
         replylist.map((com, i) =>{
           return <Comment
           CommentID={com.id}
-          displayName={com.profile_name}
-          LikeAmount={com.like_count}
-          hasVerify={com.is_verify}
+          displayName={com.displayName}
+          LikeAmount={com.LikeAmount}
+          hasVerify={com.hasVerify}
           reply={null}
-          CreateDate={com.create_at}
+          CreateDate={com.CreateDate}
           detail={com.detail}
           isLogin={props.isLogin}
           key={i}

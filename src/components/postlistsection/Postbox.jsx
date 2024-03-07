@@ -24,6 +24,7 @@ const Postbox = (props) => {
     const serverIP = getIP();
     const sending = {
       postId: PID,
+      uid: localStorage.getItem("uid"),
     };
 
     try {

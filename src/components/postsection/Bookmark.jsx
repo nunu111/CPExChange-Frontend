@@ -6,7 +6,7 @@ import { IPconfig } from "../function/IPconfig";
 
 const Bookmark = (props) => {
   return (
-    <div className="Mainbox" style={{ display: "flex" }}>
+    <div  style={{ display: "flex" }}>
       <img
         src={editIcon}
         alt="Edit_Icon"
